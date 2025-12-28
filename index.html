@@ -29,6 +29,7 @@
                 <a href="#beranda" class="hover:text-blue-500 transition">Beranda</a>
                 <a href="#divisi" class="hover:text-blue-500 transition">Divisi</a>
                 <a href="#timeline" class="hover:text-blue-500 transition">Timeline</a>
+                <a href="#struktur" class="hover:text-blue-500 transition">Panitia</a>
                 <a href="#kontak" class="hover:text-blue-500 transition">Pertanyaan</a>
                 <a href="https://docs.google.com/forms/d/e/1FAIpQLSde3G_1BOepCXYX0lIqVZhPaqK4IhgcNQqfo13c-0QxICYN4w/viewform?" target="_blank" class="bg-[#A7D8F9] text-white px-6 py-2 rounded-full btn-shadow hover:bg-blue-400 transition">Daftar Sekarang</a>
             </div>
@@ -231,44 +232,226 @@
     </section>
 
     <section id="timeline" class="bg-[#fafdfd] py-24 px-4">
-        <div class="max-w-6xl mx-auto">
+        <div class="max-w-7xl mx-auto">
             <div class="text-center mb-20">
+                <div class="inline-flex items-center gap-2 bg-red-50 border border-red-100 px-4 py-1.5 rounded-full mb-6 animate-pulse">
+                    <span class="relative flex h-2 w-2">
+                      <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                      <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                    </span>
+                    <span class="text-xs font-bold text-red-500 tracking-wide uppercase">Status: Masa Perpanjangan</span>
+                </div>
                 <h2 class="text-3xl font-bold text-[#6D7D9B] mb-4">Timeline Seleksi</h2>
                 <p class="max-w-xl mx-auto text-gray-400 text-sm leading-relaxed">
-                    Catat tanggal penting berikut agar kamu tidak ketinggalan proses rekrutmen kami.
+                    Kami membuka kesempatan terakhir! Jangan sampai terlewat lagi.
                 </p>
             </div>
 
             <div class="relative">
-                <div class="hidden md:block absolute top-10 left-[15%] right-[15%] h-[2px] bg-gray-100"></div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-4 relative">
-                    <div class="flex flex-col items-center text-center group">
-                        <div class="relative z-10 w-20 h-20 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_0_0_1px_#E2E8F0] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
-                            <div class="w-full h-full rounded-full bg-[#A7D8F9] flex items-center justify-center text-white font-bold text-xl shadow-inner">1</div>
+                <div class="hidden md:block absolute top-10 left-[10%] right-[10%] h-[2px] bg-gray-100">
+                    <div class="h-full w-[40%] bg-blue-200"></div>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative">
+                    
+                    <div class="flex flex-col items-center text-center opacity-60 grayscale transition hover:grayscale-0 hover:opacity-100">
+                        <div class="relative z-10 w-20 h-20 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_0_0_1px_#E2E8F0] flex items-center justify-center mb-6">
+                            <div class="w-full h-full rounded-full bg-gray-50 flex items-center justify-center text-gray-400 font-bold text-xl">
+                                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
                         </div>
-                        <h3 class="text-lg font-bold text-[#4A5568] mb-2">Open Registration</h3>
-                        <div class="bg-blue-50 text-[#A7D8F9] px-4 py-1 rounded-full text-xs font-bold mb-3">23 - 26 Des 2026</div>
-                        <p class="text-gray-400 text-xs leading-relaxed max-w-[200px]">Pengisian formulir pendaftaran secara online.</p>
+                        <h3 class="text-lg font-bold text-gray-500 mb-2">Open Registration</h3>
+                        <div class="bg-gray-100 text-gray-400 px-4 py-1 rounded-full text-xs font-bold mb-3">23 - 26 Des 2026</div>
+                        <p class="text-gray-400 text-xs leading-relaxed max-w-[200px]">Pendaftaran gelombang pertama telah ditutup.</p>
+                    </div>
+
+                    <div class="flex flex-col items-center text-center group transform scale-105 md:scale-110 transition-transform duration-300">
+                        <div class="relative z-10 w-24 h-24 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_0_0_1px_#A7D8F9] flex items-center justify-center mb-6">
+                            <span class="absolute -inset-1 rounded-full bg-blue-100 opacity-75 animate-ping"></span>
+                            <div class="w-full h-full rounded-full bg-[#A7D8F9] flex items-center justify-center text-white font-bold text-2xl shadow-lg relative z-20">
+                                2
+                            </div>
+                        </div>
+                        <h3 class="text-xl font-bold text-[#3B5481] mb-2">Extend Registration</h3>
+                        <div class="bg-blue-100 text-blue-600 px-6 py-1.5 rounded-full text-xs font-bold mb-3 shadow-sm">
+                            SEDANG BERLANGSUNG
+                        </div>
+                        <p class="text-gray-500 text-sm font-medium leading-relaxed max-w-[220px]">
+                            Kesempatan terakhir! Pendaftaran dibuka kembali tanggal <span class="text-[#3B5481] font-bold">28 - 29 Des 2026</span>.
+                        </p>
                     </div>
 
                     <div class="flex flex-col items-center text-center group">
                         <div class="relative z-10 w-20 h-20 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_0_0_1px_#E2E8F0] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
-                            <div class="w-full h-full rounded-full border-2 border-pink-100 flex items-center justify-center text-[#4A5568] font-bold text-xl bg-white">2</div>
+                            <div class="w-full h-full rounded-full border-2 border-gray-100 flex items-center justify-center text-gray-400 font-bold text-xl bg-white">3</div>
                         </div>
                         <h3 class="text-lg font-bold text-[#4A5568] mb-2">Close Registration</h3>
-                        <div class="bg-blue-50 text-[#A7D8F9] px-4 py-1 rounded-full text-xs font-bold mb-3">26 Des 2026</div>
-                        <p class="text-gray-400 text-xs leading-relaxed max-w-[200px]">Batas akhir pengumpulan berkas pendaftaran.</p>
+                        <div class="bg-white border border-gray-200 text-gray-400 px-4 py-1 rounded-full text-xs font-bold mb-3">30 Des 2026</div>
+                        <p class="text-gray-400 text-xs leading-relaxed max-w-[200px]">Batas akhir final pengumpulan berkas pendaftaran.</p>
                     </div>
 
                     <div class="flex flex-col items-center text-center group">
                         <div class="relative z-10 w-20 h-20 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_0_0_1px_#E2E8F0] flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-110">
-                            <div class="w-full h-full rounded-full border-2 border-pink-100 flex items-center justify-center text-[#4A5568] font-bold text-xl bg-white">3</div>
+                            <div class="w-full h-full rounded-full border-2 border-gray-100 flex items-center justify-center text-gray-400 font-bold text-xl bg-white">4</div>
                         </div>
                         <h3 class="text-lg font-bold text-[#4A5568] mb-2">Pengumuman</h3>
-                        <div class="bg-blue-50 text-[#A7D8F9] px-4 py-1 rounded-full text-xs font-bold mb-3">27 Des 2026</div>
-                        <p class="text-gray-400 text-xs leading-relaxed max-w-[200px]">Hasil seleksi diumumkan lewat grup dan dm kontak.</p>
+                        <div class="bg-white border border-gray-200 text-gray-400 px-4 py-1 rounded-full text-xs font-bold mb-3">28 & 30 Des 2026</div>
+                        <p class="text-gray-400 text-xs leading-relaxed max-w-[200px]">Hasil seleksi diumumkan bertahap lewat kontak pribadi.</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="struktur" class="bg-white py-24 px-4 border-t border-gray-50">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold text-[#6D7D9B] mb-4">Struktur Kepanitiaan</h2>
+                <p class="max-w-2xl mx-auto text-gray-400 text-sm leading-relaxed">
+                        Mengenal tim gokil di balik layar URBAN UI 2026.
+                </p>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-center gap-8 mb-16 max-w-4xl mx-auto">
+                <div class="bg-[#FDFBFA] p-8 rounded-3xl border border-blue-100 w-full md:w-1/2 text-center relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-[#A7D8F9]"></div>
+                    <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden border-4 border-white shadow-md">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=12" alt="PO" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-[#3B5481]">M. Sultan Zidan</h3>
+                    <p class="text-[#A7D8F9] font-bold text-xs tracking-widest uppercase mb-4">Project Officer</p>
+                </div>
+
+                <div class="bg-[#FDFBFA] p-8 rounded-3xl border border-blue-100 w-full md:w-1/2 text-center relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-[#A7D8F9]"></div>
+                    <div class="w-24 h-24 mx-auto bg-gray-200 rounded-full mb-4 overflow-hidden border-4 border-white shadow-md">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=gibran" alt="VPO" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-xl font-bold text-[#3B5481]">Arsyil Putra</h3>
+                    <p class="text-[#A7D8F9] font-bold text-xs tracking-widest uppercase mb-4">Vice Project Officer</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                
+                <div class="bg-pink-50/50 rounded-2xl p-6 hover:bg-white hover:shadow-md transition duration-300 border border-pink-100">
+                    <div class="flex items-center gap-4 mb-4 border-b border-pink-200 pb-4">
+                        <div class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-500 font-bold">S</div>
+                        <div>
+                            <h4 class="font-bold text-[#4A5568]">Secretary</h4>
+                            <p class="text-xs text-gray-400">Yoga Hediasa</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Staff:</p>
+                        <p class="text-xs text-gray-400 italic">Staff belum tersedia</p>
                     </div>
                 </div>
+
+                <div class="bg-teal-50/50 rounded-2xl p-6 hover:bg-white hover:shadow-md transition duration-300 border border-teal-100">
+                    <div class="flex items-center gap-4 mb-4 border-b border-teal-200 pb-4">
+                        <div class="w-10 h-10 rounded-full bg-teal-100 flex items-center justify-center text-teal-500 font-bold">F</div>
+                        <div>
+                            <h4 class="font-bold text-[#4A5568]">Finance</h4>
+                            <p class="text-xs text-gray-400">Hubbika Yumna F.</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Staff:</p>
+                        <ul class="text-xs text-gray-500 space-y-1">
+                            <li>• Hanin Zharifah</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-red-50/50 rounded-2xl p-6 hover:bg-white hover:shadow-md transition duration-300 border border-red-100">
+                    <div class="flex items-center gap-4 mb-4 border-b border-red-200 pb-4">
+                        <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-500 font-bold">E</div>
+                        <div>
+                            <h4 class="font-bold text-[#4A5568]">Event</h4>
+                            <p class="text-xs text-gray-400">Head: <span class="text-gray-600 font-semibold">Andhika Raditya M.</span></p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Staff:</p>
+                        <ul class="text-xs text-gray-500 space-y-1">
+                            <li>• Syafrizal Abdul Rozaq</li>
+                            <li>• Izyani Tri Maulidiyah</li>
+                            <li>• Aghnie Prasta Syahnurrunita</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-green-50/50 rounded-2xl p-6 hover:bg-white hover:shadow-md transition duration-300 border border-green-100">
+                    <div class="flex items-center gap-4 mb-4 border-b border-green-200 pb-4">
+                        <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center text-green-500 font-bold">R</div>
+                        <div>
+                            <h4 class="font-bold text-[#4A5568]">Relations</h4>
+                            <p class="text-xs text-gray-400">Head: <span class="text-gray-600 font-semibold">Keysha Asila Hermawan</span></p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Staff:</p>
+                        <ul class="text-xs text-gray-500 space-y-1">
+                            <li>• Maheswara Luthfi D.W.</li>
+                            <li>• Soraya Rahma Al Mahira</li>
+                            <li>• Roadez Muqorrobin</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50/50 rounded-2xl p-6 hover:bg-white hover:shadow-md transition duration-300 border border-blue-100">
+                    <div class="flex items-center gap-4 mb-4 border-b border-blue-200 pb-4">
+                        <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500 font-bold">K</div>
+                        <div>
+                            <h4 class="font-bold text-[#4A5568]">Comminfo</h4>
+                            <p class="text-xs text-gray-400">Head: <span class="text-gray-600 font-semibold">Rahma Madina Tutuko</span></p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Staff:</p>
+                        <ul class="text-xs text-gray-500 space-y-1">
+                            <li>• Aiska Najma Siti Azizah</li>
+                            <li>• Rizky Prasasi Phasya</li>
+                            <li>• Diajeng Arofa</li>
+                            <li>• Kayla Alifah Khairunisa</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-purple-50/50 rounded-2xl p-6 hover:bg-white hover:shadow-md transition duration-300 border border-purple-100">
+                    <div class="flex items-center gap-4 mb-4 border-b border-purple-200 pb-4">
+                        <div class="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center text-purple-500 font-bold">S</div>
+                        <div>
+                            <h4 class="font-bold text-[#4A5568]">Sponsorship</h4>
+                            <p class="text-xs text-gray-400">Head: <span class="text-gray-400 italic">-</span></p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Staff:</p>
+                        <ul class="text-xs text-gray-500 space-y-1">
+                            <li>• Rasha Bagus Satrio</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-50/50 rounded-2xl p-6 hover:bg-white hover:shadow-md transition duration-300 border border-yellow-100">
+                    <div class="flex items-center gap-4 mb-4 border-b border-yellow-200 pb-4">
+                        <div class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-500 font-bold">L</div>
+                        <div>
+                            <h4 class="font-bold text-[#4A5568]">Logistics</h4>
+                            <p class="text-xs text-gray-400">Head: <span class="text-gray-600 font-semibold">Anaphalis Giri Azhari</span></p>
+                        </div>
+                    </div>
+                    <div class="space-y-2">
+                        <p class="text-[10px] text-gray-400 uppercase font-bold tracking-wider mb-1">Staff:</p>
+                        <ul class="text-xs text-gray-500 space-y-1">
+                            <li>• Isyarta Khafidho M.</li>
+                        </ul>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
