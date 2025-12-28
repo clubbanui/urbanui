@@ -231,77 +231,84 @@
         </div>
     </section>
 
-    <section id="timeline" class="bg-[#fafdfd] py-24 px-4">
+    <section id="timeline" class="bg-[#fafdfd] py-24 px-4 overflow-hidden">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-20">
-                <div class="inline-flex items-center gap-2 bg-red-50 border border-red-100 px-4 py-1.5 rounded-full mb-6 animate-pulse">
+            <div class="text-center mb-16 md:mb-20">
+                <div class="inline-flex items-center gap-2 bg-red-50 border border-red-100 px-4 py-1.5 rounded-full mb-6 shadow-sm">
                     <span class="relative flex h-2 w-2">
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                     </span>
                     <span class="text-xs font-bold text-red-500 tracking-wide uppercase">Status: Masa Perpanjangan</span>
                 </div>
-                <h2 class="text-3xl font-bold text-[#6D7D9B] mb-4">Timeline Seleksi</h2>
+                <h2 class="text-3xl md:text-4xl font-bold text-[#6D7D9B] mb-4 tracking-tight">Timeline Seleksi</h2>
                 <p class="max-w-xl mx-auto text-gray-400 text-sm leading-relaxed">
-                    Kami membuka kesempatan terakhir! Jangan sampai terlewat lagi.
+                    Kami membuka kesempatan terakhir! Ikuti alur berikut agar tidak terlewat.
                 </p>
             </div>
 
             <div class="relative">
-                
-                <div class="hidden md:block absolute top-10 left-[10%] right-[10%] h-[2px] bg-gray-100 z-0">
-                    <div class="h-full w-[40%] bg-blue-200"></div>
+                <div class="hidden md:block absolute top-10 left-[10%] right-[10%] h-[2px] bg-slate-100 z-0">
+                    <div class="h-full w-[40%] bg-gradient-to-r from-blue-100 to-blue-200"></div>
                 </div>
 
-                <div class="block md:hidden absolute top-4 bottom-20 left-1/2 w-[2px] bg-gray-100 -translate-x-1/2 z-0">
-                    <div class="w-full h-[40%] bg-blue-200"></div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-8 relative z-10">
+                <div class="md:hidden absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-[2px] bg-slate-100 z-0"></div>
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 md:gap-8 relative z-10">
                     
-                    <div class="flex flex-col items-center text-center opacity-60 grayscale transition hover:grayscale-0 hover:opacity-100">
-                        <div class="relative z-10 w-20 h-20 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_0_0_1px_#E2E8F0] flex items-center justify-center mb-4 md:mb-6">
-                            <div class="w-full h-full rounded-full bg-gray-50 flex items-center justify-center text-gray-400 font-bold text-xl">
+                    <div class="flex flex-col items-center text-center group">
+                        <div class="relative w-20 h-20 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_4px_20px_-2px_rgba(0,0,0,0.1)] flex items-center justify-center mb-4 md:mb-6">
+                            <div class="w-full h-full rounded-full bg-slate-50 flex items-center justify-center text-slate-300 transition-colors duration-300 group-hover:text-slate-400">
                                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                         </div>
-                        <h3 class="text-lg font-bold text-gray-500 mb-2">Open Registration</h3>
-                        <div class="bg-gray-100 text-gray-400 px-4 py-1 rounded-full text-xs font-bold mb-3">23 - 26 Des 2026</div>
-                        <p class="text-gray-400 text-xs leading-relaxed max-w-[200px] bg-[#fafdfd] relative z-10">Pendaftaran gelombang pertama telah ditutup.</p>
+                        <div class="bg-white/50 md:bg-transparent p-4 md:p-0 rounded-2xl md:rounded-none backdrop-blur-sm md:backdrop-blur-none w-full max-w-[280px]">
+                            <h3 class="text-lg font-bold text-slate-400 mb-1">Open Registration</h3>
+                            <div class="inline-block bg-slate-100 text-slate-400 px-3 py-0.5 rounded-full text-[10px] font-bold tracking-wide mb-3">SELESAI</div>
+                            <p class="text-slate-400 text-xs leading-relaxed">Pendaftaran gelombang pertama telah ditutup.</p>
+                        </div>
                     </div>
 
-                    <div class="flex flex-col items-center text-center group transform scale-105 md:scale-110 transition-transform duration-300">
-                        <div class="relative z-10 w-24 h-24 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_0_0_1px_#A7D8F9] flex items-center justify-center mb-4 md:mb-6">
-                            <span class="absolute -inset-1 rounded-full bg-blue-100 opacity-75 animate-ping"></span>
-                            <div class="w-full h-full rounded-full bg-[#A7D8F9] flex items-center justify-center text-white font-bold text-2xl shadow-lg relative z-20">
+                    <div class="flex flex-col items-center text-center transform md:scale-110 md:-mt-4 transition-transform duration-300">
+                        <div class="relative w-24 h-24 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_0_0_1px_#A7D8F9] flex items-center justify-center mb-4 md:mb-6">
+                            <span class="absolute -inset-2 rounded-full bg-blue-50 opacity-50 animate-pulse"></span>
+                            <div class="w-full h-full rounded-full bg-gradient-to-br from-[#A7D8F9] to-[#80c4f5] flex items-center justify-center text-white font-bold text-3xl shadow-inner">
                                 2
                             </div>
                         </div>
-                        <h3 class="text-xl font-bold text-[#3B5481] mb-2">Extend Registration</h3>
-                        <div class="bg-blue-100 text-blue-600 px-6 py-1.5 rounded-full text-xs font-bold mb-3 shadow-sm">
-                            SEDANG BERLANGSUNG
+                        <div class="relative bg-white md:bg-transparent p-6 md:p-0 rounded-2xl shadow-xl md:shadow-none border border-blue-50 md:border-none w-full max-w-[300px] md:max-w-none">
+                            <div class="md:hidden absolute -top-2 left-1/2 -translate-x-1/2 w-4 h-4 bg-white rotate-45 border-t border-l border-blue-50"></div>
+                            
+                            <h3 class="text-xl font-bold text-[#3B5481] mb-2">Extend Registration</h3>
+                            <div class="inline-block bg-blue-50 text-blue-600 border border-blue-100 px-4 py-1 rounded-full text-[11px] font-bold mb-3 shadow-sm">
+                                SEDANG BERLANGSUNG
+                            </div>
+                            <p class="text-slate-500 text-sm font-medium leading-relaxed">
+                                Kesempatan terakhir! Dibuka kembali <br class="hidden md:block">tanggal <span class="text-[#3B5481] font-bold">28 - 29 Des 2026</span>.
+                            </p>
                         </div>
-                        <p class="text-gray-500 text-sm font-medium leading-relaxed max-w-[220px] bg-[#fafdfd] relative z-10">
-                            Kesempatan terakhir! Pendaftaran dibuka kembali tanggal <span class="text-[#3B5481] font-bold">28 - 29 Des 2026</span>.
-                        </p>
                     </div>
 
                     <div class="flex flex-col items-center text-center group">
-                        <div class="relative z-10 w-20 h-20 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_0_0_1px_#E2E8F0] flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
-                            <div class="w-full h-full rounded-full border-2 border-gray-100 flex items-center justify-center text-gray-400 font-bold text-xl bg-white">3</div>
+                        <div class="relative w-20 h-20 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:-translate-y-1">
+                            <div class="w-full h-full rounded-full border-2 border-dashed border-slate-200 flex items-center justify-center text-slate-300 font-bold text-xl bg-white">3</div>
                         </div>
-                        <h3 class="text-lg font-bold text-[#4A5568] mb-2">Close Registration</h3>
-                        <div class="bg-white border border-gray-200 text-gray-400 px-4 py-1 rounded-full text-xs font-bold mb-3">30 Des 2026</div>
-                        <p class="text-gray-400 text-xs leading-relaxed max-w-[200px] bg-[#fafdfd] relative z-10">Batas akhir final pengumpulan berkas pendaftaran.</p>
+                        <div class="w-full max-w-[280px]">
+                            <h3 class="text-lg font-bold text-slate-500 mb-1">Close Registration</h3>
+                            <div class="inline-block border border-slate-200 text-slate-400 px-3 py-0.5 rounded-full text-[10px] font-bold tracking-wide mb-3">30 DES 2026</div>
+                            <p class="text-slate-400 text-xs leading-relaxed">Batas akhir final pengumpulan berkas.</p>
+                        </div>
                     </div>
 
                     <div class="flex flex-col items-center text-center group">
-                        <div class="relative z-10 w-20 h-20 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_0_0_1px_#E2E8F0] flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:scale-110">
-                            <div class="w-full h-full rounded-full border-2 border-gray-100 flex items-center justify-center text-gray-400 font-bold text-xl bg-white">4</div>
+                        <div class="relative w-20 h-20 bg-white rounded-full border-8 border-[#fafdfd] shadow-[0_4px_20px_-2px_rgba(0,0,0,0.05)] flex items-center justify-center mb-4 md:mb-6 transition-transform duration-300 group-hover:-translate-y-1">
+                            <div class="w-full h-full rounded-full border-2 border-dashed border-slate-200 flex items-center justify-center text-slate-300 font-bold text-xl bg-white">4</div>
                         </div>
-                        <h3 class="text-lg font-bold text-[#4A5568] mb-2">Pengumuman</h3>
-                        <div class="bg-white border border-gray-200 text-gray-400 px-4 py-1 rounded-full text-xs font-bold mb-3">28 & 30 Des 2026</div>
-                        <p class="text-gray-400 text-xs leading-relaxed max-w-[200px] bg-[#fafdfd] relative z-10">Hasil seleksi diumumkan bertahap lewat kontak pribadi.</p>
+                        <div class="w-full max-w-[280px]">
+                            <h3 class="text-lg font-bold text-slate-500 mb-1">Pengumuman</h3>
+                            <div class="inline-block border border-slate-200 text-slate-400 px-3 py-0.5 rounded-full text-[10px] font-bold tracking-wide mb-3">BERTAHAP</div>
+                            <p class="text-slate-400 text-xs leading-relaxed">Hasil seleksi diumumkan via WhatsApp.</p>
+                        </div>
                     </div>
 
                 </div>
