@@ -1055,338 +1055,383 @@
         </div>
     </section>
 
-<section id="roadshow" class="relative w-full py-16 md:py-32 bg-[#fafdfd] overflow-hidden">
-        
-        <div class="container mx-auto relative z-10">
+    <section id="roadshow" class="relative w-full py-16 md:py-32 bg-[#fafdfd] overflow-hidden">
             
-            <div class="text-center mb-10 md:mb-12 animate-[fadeInUp_1s_ease-out] px-6">
-                <span class="px-5 py-2 rounded-full border border-blue-100 bg-white shadow-sm inline-flex items-center gap-2">
-                    <span class="relative flex h-2 w-2">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
-                    </span>
-                    <span class="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-slate-400">
-                        Roadshow Schedule
-                    </span>
-                </span>
-                <h2 class="mt-6 text-3xl md:text-5xl font-black text-[#6D7D9B] tracking-tight">
-                    VISIT <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC]">LOCATION</span>
-                </h2>
-            </div>
-
-            <div id="roadshow-container" class="flex flex-nowrap gap-5 overflow-x-auto pb-12 px-8 md:px-10 snap-x snap-mandatory scrollbar-hide w-full items-stretch" style="-webkit-overflow-scrolling: touch;">
+            <div class="container mx-auto relative z-10">
                 
-                <div class="w-full flex justify-center items-center py-20 text-slate-400 font-light animate-pulse">
-                    Memuat Jadwal Roadshow...
+                <div class="text-center mb-10 md:mb-12 animate-[fadeInUp_1s_ease-out] px-6">
+                    <span class="px-5 py-2 rounded-full border border-blue-100 bg-white shadow-sm inline-flex items-center gap-2">
+                        <span class="relative flex h-2 w-2">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
+                        </span>
+                        <span class="text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase text-slate-400">
+                            Roadshow Schedule
+                        </span>
+                    </span>
+                    <h2 class="mt-6 text-3xl md:text-5xl font-black text-[#6D7D9B] tracking-tight">
+                        VISIT <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC]">LOCATION</span>
+                    </h2>
                 </div>
 
-            </div>
-        </div>
+                <div id="roadshow-container" class="flex flex-nowrap gap-5 overflow-x-auto pb-12 px-8 md:px-10 snap-x snap-mandatory scrollbar-hide w-full items-stretch" style="-webkit-overflow-scrolling: touch;">
+                    
+                    <div class="w-full flex justify-center items-center py-20 text-slate-400 font-light animate-pulse">
+                        Memuat Jadwal Roadshow...
+                    </div>
 
-        <div id="scheduleModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true">
-            <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0" id="modalOverlay" onclick="closeSchedule()"></div>
-            <div class="relative z-10 flex items-center justify-center w-full h-full p-4 pointer-events-none">
-                <div class="relative transform scale-95 opacity-0 transition-all duration-300 ease-out pointer-events-auto" id="modalContent">
-                    <button onclick="closeSchedule()" class="absolute -top-12 right-0 md:-right-12 text-white hover:text-[#A7D8F9] transition-colors p-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-                    </button>
-                    <img id="scheduleImage" src="" alt="Jadwal Roadshow" class="max-w-full max-h-[85vh] w-auto h-auto object-contain drop-shadow-2xl select-none rounded-lg bg-white">
                 </div>
             </div>
-        </div>
 
-        <style>
-            .scrollbar-hide::-webkit-scrollbar { display: none; }
-            .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        </style>
-
-        <script>
-            const SHEET_ID = "1h3FQzmoyTQKoOQxy01eovGswGyQ3iXXPLn2hXAZx2wg";
-            const SHEET_GID = "0";
-            
-            document.addEventListener("DOMContentLoaded", function() {
-                const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${SHEET_GID}`;
-
-                fetch(url)
-                .then(res => res.text())
-                .then(text => {
-                    const jsonText = text.substring(47).slice(0, -2);
-                    const json = JSON.parse(jsonText);
-
-                    if (!json.table) {
-                        console.error("Structure Error:", json);
-                        document.getElementById('roadshow-container').innerHTML = `<div class="w-full text-center text-red-400">Gagal membaca struktur data (Cek format Sheet).</div>`;
-                        return;
-                    }
-                    
-                    renderRoadshow(json.table.rows);
-                })
-                .catch(err => {
-                    console.error("Gagal mengambil data:", err);
-                    document.getElementById('roadshow-container').innerHTML = `<div class="w-full text-center text-red-400">Gagal memuat data.</div>`;
-                });
-            });
-
-            function getDirectDriveLink(driveUrl) {
-                if (!driveUrl) return "";
-                const strUrl = String(driveUrl); 
-                
-                const idPattern = /\/d\/([a-zA-Z0-9_-]+)|\?id=([a-zA-Z0-9_-]+)/;
-                const match = strUrl.match(idPattern);
-                if (match) {
-                    const fileId = match[1] || match[2];
-                    return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`; 
-                }
-                return strUrl;
-            }
-
-            function getSafeValue(cell) {
-                if (!cell) return "";
-                if (cell.f) return cell.f;
-                if (cell.v !== null && cell.v !== undefined) return String(cell.v);
-                return "";
-            }
-
-            function getRole(cell) {
-                const val = getSafeValue(cell);
-                return val ? val : "Volunteer";
-            }
-
-            function renderRoadshow(rows) {
-                const container = document.getElementById('roadshow-container');
-                container.innerHTML = ""; 
-
-                let volunteers = [];
-                
-
-                for (let i = 1; i < rows.length; i++) {
-                    const row = rows[i];
-                    if (!row) continue;
-
-                    const confirmStatus = getSafeValue(row.c[9]); 
-                    
-                    if (confirmStatus === "☑ Accepted") {
-                        volunteers.push({
-                            nama: getSafeValue(row.c[1]) || "Volunteer",
-                            sekolah: getSafeValue(row.c[5]),
-                            foto: getDirectDriveLink(getSafeValue(row.c[7])),
-                            role: getRole(row.c[8])
-                        });
-                    }
-                }
-
-                let hasSchool = false;
-
-                for (let i = 2; i < rows.length; i++) {
-                    const row = rows[i];
-                    if (!row || !row.c[11]) continue;
-
-                    const namaSekolah = getSafeValue(row.c[11]);
-                    if (!namaSekolah) continue;
-
-                    hasSchool = true;
-                    
-                    const tanggal = getSafeValue(row.c[12]) || "-";
-                    const waktu = getSafeValue(row.c[13]) || "TBA";
-                    const mapsLink = getSafeValue(row.c[14]) || "#";
-                    
-                    const gambarRaw = getSafeValue(row.c[15]);
-                    const gambarSekolah = gambarRaw ? getDirectDriveLink(gambarRaw) : "https://via.placeholder.com/400x300?text=No+Image";
-                    
-                    const jadwalRaw = getSafeValue(row.c[16]);
-                    let popupImageSrc = jadwalRaw ? getDirectDriveLink(jadwalRaw) : "https://via.placeholder.com/600x800?text=Jadwal+Do+Not+Exist";
-
-                    const statusRaw = getSafeValue(row.c[17]) || "⚠ Closed";
-
-                    const mapEmbedSrc = `https://maps.google.com/maps?q=$${encodeURIComponent(namaSekolah)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-
-                    const teamOnSite = volunteers.filter(v => v.sekolah === namaSekolah);
-
-                    let badgeHTML = "";
-                    let buttonHTML = "";
-
-                    if (statusRaw === "☐ Open") {
-                        badgeHTML = `
-                            <div class="px-4 py-1.5 rounded-full bg-white/95 border border-teal-100 text-teal-500 shadow-sm flex items-center gap-2 backdrop-blur-md">
-                                <span class="relative flex h-1.5 w-1.5">
-                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-500"></span>
-                                </span>
-                                <span class="text-[9px] font-black tracking-[0.2em] uppercase">OPEN</span>
-                            </div>`;
-                        
-                        buttonHTML = `
-                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSf5roq0oUPK2H_zlQJXkBvHcRuYctEk_DwIOGnRj005HNEkeg/viewform?usp=dialog" class="group/btn relative w-full py-3 md:py-4 rounded-xl md:rounded-2xl bg-white text-slate-500 border border-slate-200 shadow-sm overflow-hidden active:scale-[0.98] transition-all duration-300 flex items-center justify-center">
-                                <div class="absolute inset-0 bg-gradient-to-r from-[#A7D8F9] via-[#E0C3FC] to-[#A7D8F9] bg-[length:200%_auto] opacity-0 group-hover/btn:opacity-100 group-hover/btn:animate-[text-shimmer_3s_linear_infinite] transition-opacity duration-300"></div>
-                                <div class="relative z-10 flex items-center justify-center gap-2 group-hover/btn:text-white transition-colors duration-300">
-                                    <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase">Daftar Volunteer</span>
-                                    <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                                </div>
-                            </a>`;
-                    
-                    } else if (statusRaw === "☑ Confirmed") {
-                        badgeHTML = `
-                            <div class="px-4 py-1.5 rounded-full bg-emerald-50/95 border border-emerald-100 text-emerald-600 shadow-sm flex items-center gap-2 backdrop-blur-md">
-                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                                <span class="text-[9px] font-black tracking-[0.2em] uppercase">SELESAI</span>
-                            </div>`;
-
-                        buttonHTML = `
-                            <div class="w-full py-3 md:py-4 rounded-xl md:rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-400 flex items-center justify-center cursor-default opacity-80">
-                                <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase">Kegiatan Selesai</span>
-                            </div>`;
-                    
-                    } else {
-                        badgeHTML = `
-                            <div class="px-4 py-1.5 rounded-full bg-slate-100/95 border border-slate-200 text-slate-400 shadow-sm flex items-center gap-2 backdrop-blur-md">
-                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
-                                <span class="text-[9px] font-black tracking-[0.2em] uppercase">CLOSED</span>
-                            </div>`;
-
-                        buttonHTML = `
-                            <div class="w-full py-3 md:py-4 rounded-xl md:rounded-2xl bg-slate-100 border border-slate-200 text-slate-400 flex items-center justify-center cursor-not-allowed">
-                                <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase">Tidak Tersedia</span>
-                            </div>`;
-                    }
-
-                    const cardHTML = `
-                    <div class="w-[85vw] max-w-[340px] md:w-[380px] md:max-w-none flex-none snap-center group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 flex flex-col relative isolate transform-gpu">
-                        
-                        <div class="absolute top-5 left-5 z-40 pointer-events-none">
-                            ${badgeHTML}
-                        </div>
-
-                        <button onclick="openSchedule('${popupImageSrc}')" class="absolute top-5 right-5 z-40 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-md border border-slate-100 text-[#6D7D9B] shadow-sm flex items-center justify-center hover:scale-110 hover:text-[#A7D8F9] transition-all duration-300 group/icon cursor-pointer" title="Lihat Jadwal">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
-                            </svg>
+            <div id="scheduleModal" class="fixed inset-0 z-[100] hidden" role="dialog" aria-modal="true">
+                <div class="absolute inset-0 bg-slate-900/60 backdrop-blur-sm transition-opacity opacity-0" id="modalOverlay" onclick="closeSchedule()"></div>
+                <div class="relative z-10 flex items-center justify-center w-full h-full p-4 pointer-events-none">
+                    <div class="relative transform scale-95 opacity-0 transition-all duration-300 ease-out pointer-events-auto" id="modalContent">
+                        <button onclick="closeSchedule()" class="absolute -top-12 right-0 md:-right-12 text-white hover:text-[#A7D8F9] transition-colors p-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                         </button>
-
-                        <div class="relative h-60 md:h-72 w-full overflow-hidden rounded-t-[2.5rem] z-0 backface-hidden" style="transform: translateZ(0); -webkit-mask-image: -webkit-radial-gradient(white, black); mask-image: radial-gradient(white, black);">
-                            <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-20 opacity-90 pointer-events-none"></div>
-                            <img src="${gambarSekolah}" alt="${namaSekolah}" loading="lazy" class="relative z-10 w-full h-full object-cover origin-center group-hover:scale-110 transition-transform duration-700 ease-in-out will-change-transform">
-                        </div>
-
-                        <div class="px-6 pb-6 md:px-8 md:pb-8 flex flex-col flex-1 -mt-12 relative z-30">
-                            
-                            <div class="bg-white/90 backdrop-blur-xl border border-white p-5 md:p-6 rounded-3xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)] mb-5">
-                                <h3 class="text-xl md:text-2xl font-black text-[#6D7D9B] leading-tight mb-3 group-hover:text-[#A7D8F9] transition-colors duration-300">
-                                    ${namaSekolah}
-                                </h3>
-                                <div class="grid grid-cols-2 gap-3">
-                                    <div class="flex flex-col">
-                                        <span class="text-[9px] font-bold text-slate-300 uppercase tracking-widest mb-1">Tanggal</span>
-                                        <div class="flex items-center gap-1.5 text-slate-500">
-                                            <svg class="w-3.5 h-3.5 text-[#A7D8F9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                                            <span class="text-xs md:text-sm font-bold">${tanggal}</span>
-                                        </div>
-                                    </div>
-                                    <div class="flex flex-col border-l border-slate-100 pl-3">
-                                        <span class="text-[9px] font-bold text-slate-300 uppercase tracking-widest mb-1">Waktu</span>
-                                        <div class="flex items-center gap-1.5 text-slate-500">
-                                            <svg class="w-3.5 h-3.5 text-[#E0C3FC]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                                            <span class="text-xs md:text-sm font-bold">${waktu}</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mb-6 group/map relative w-full h-28 md:h-32 rounded-2xl overflow-hidden border border-slate-100 bg-slate-50 shadow-inner">
-                                <iframe 
-                                    src="${mapEmbedSrc}" 
-                                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-                                    class="w-full h-full grayscale opacity-60 group-hover/map:grayscale-0 group-hover/map:opacity-100 transition-all duration-500 ease-out">
-                                </iframe>
-                                <a href="${mapsLink}" target="_blank" class="absolute inset-0 z-10 flex items-center justify-center bg-slate-900/0 group-hover/map:bg-slate-900/10 transition-all duration-300">
-                                    <span class="opacity-0 group-hover/map:opacity-100 translate-y-4 group-hover/map:translate-y-0 transition-all duration-500 bg-white/95 backdrop-blur text-[#6D7D9B] text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
-                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                                        Buka Peta
-                                    </span>
-                                </a>
-                            </div>
-
-                            <div class="mt-auto">
-                                <div class="flex flex-col mb-5">
-                                    <span class="text-[9px] font-bold text-slate-300 uppercase tracking-widest mb-2">Team on Site (${teamOnSite.length})</span>
-                                    <div class="flex flex-nowrap gap-1.5 overflow-x-auto overflow-y-hidden py-2 px-1 scrollbar-hide items-center">
-                                        ${generateTeamAvatars(teamOnSite)}
-                                        <div class="w-2 flex-shrink-0"></div>
-                                    </div>
-                                </div>
-                                ${buttonHTML}
-                            </div>
-                        </div>
+                        <img id="scheduleImage" src="" alt="Jadwal Roadshow" class="max-w-full max-h-[85vh] w-auto h-auto object-contain drop-shadow-2xl select-none rounded-lg bg-white">
                     </div>
-                    `;
-                    container.insertAdjacentHTML('beforeend', cardHTML);
-                }
+                </div>
+            </div>
 
-                if (hasSchool) {
-                    container.insertAdjacentHTML('beforeend', `
-                    <div class="w-[85vw] max-w-[340px] md:w-[380px] md:max-w-none flex-none snap-center group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 flex flex-col justify-center items-center h-auto min-h-[500px]">
-                        <span class="text-slate-300 font-bold uppercase tracking-widest text-xs">Lokasi Berikutnya</span>
-                    </div>`);
+            <style>
+                .scrollbar-hide::-webkit-scrollbar { display: none; }
+                .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+            </style>
+
+            <script>
+    // KONFIGURASI SHEET
+    const SHEET_ID = "1evR4QPeKZWJjBON0-6qT6mhwYypqt-FjX-cy5xf9iWo";
+    const SHEET_GID = "965565536";
+    
+    document.addEventListener("DOMContentLoaded", function() {
+        const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&gid=${SHEET_GID}`;
+
+        fetch(url)
+        .then(res => res.text())
+        .then(text => {
+            // Membersihkan response JSON dari Google (menghapus /*O_o*/ dan );)
+            const jsonText = text.substring(47).slice(0, -2);
+            const json = JSON.parse(jsonText);
+
+            if (!json.table) {
+                console.error("Structure Error:", json);
+                document.getElementById('roadshow-container').innerHTML = `<div class="w-full text-center text-red-400">Gagal membaca struktur data.</div>`;
+                return;
+            }
+            
+            renderRoadshow(json.table.rows);
+        })
+        .catch(err => {
+            console.error("Gagal mengambil data:", err);
+            document.getElementById('roadshow-container').innerHTML = `<div class="w-full text-center text-red-400">Gagal memuat data.</div>`;
+        });
+    });
+
+    // Helper: Mengubah Link Google Drive menjadi Link Gambar Langsung
+    function getDirectDriveLink(driveUrl) {
+        if (!driveUrl) return "";
+        const strUrl = String(driveUrl).trim();
+        const idPattern = /[\?&]id=([a-zA-Z0-9_-]+)|\/d\/([a-zA-Z0-9_-]+)/;
+        const match = strUrl.match(idPattern);
+        if (match) {
+            const fileId = match[1] || match[2];
+            return `https://drive.google.com/thumbnail?id=${fileId}&sz=w1000`;
+        }
+        return strUrl;
+    }
+
+    // Helper: Mengambil nilai teks aman dari cell
+    function getSafeValue(cell) {
+        if (!cell) return "";
+        if (cell.f) return cell.f; // Prioritas: Nilai terformat (tampilan di sheet)
+        if (cell.v !== null && cell.v !== undefined) return String(cell.v);
+        return "";
+    }
+
+    // Helper: KHUSUS TANGGAL (Bisa string rentang atau object date)
+    function getFormattedDate(cell) {
+        if (!cell) return "-";
+        
+        // 1. Jika di Sheet sudah diformat teks (misal: '5-6 Jan 2026' atau format date custom), pakai itu.
+        if (cell.f) return cell.f; 
+        
+        // 2. Jika tidak ada format (f), cek value raw (v)
+        if (cell.v !== null && cell.v !== undefined) {
+            const val = String(cell.v);
+            
+            // Jika tipe datanya Date dari system Google (format: "Date(yyyy,m,d)")
+            // Contoh: Date(2026,0,20) -> Bulan dimulai dari 0 (Januari)
+            if (val.startsWith("Date(")) {
+                const parts = val.match(/Date\((\d+),(\d+),(\d+)\)/);
+                if (parts) {
+                    const months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
+                    // Return format: 20 Jan 2026
+                    return `${parts[3]} ${months[parseInt(parts[2])]} ${parts[1]}`;
                 }
             }
+            // Jika string biasa (misal input manual tanpa petik tapi terdeteksi string)
+            return val;
+        }
+        return "-";
+    }
 
-            function generateTeamAvatars(team) {
-                if (!team || team.length === 0) {
-                    return `<span class="text-xs text-slate-400 italic">Belum ada team.</span>`;
-                }
-                let avatarsHTML = "";
-                const borders = ['border-blue-100', 'border-purple-100', 'border-amber-100', 'border-pink-100', 'border-teal-100'];
-                const textColors = ['text-blue-400', 'text-purple-400', 'text-amber-400', 'text-pink-400', 'text-teal-400'];
+    function getRole(cell) {
+        const val = getSafeValue(cell);
+        return val ? val : "Volunteer";
+    }
 
-                team.forEach((member, index) => {
-                    const borderColor = borders[index % borders.length];
-                    const textColor = textColors[index % textColors.length];
-                    
-                    avatarsHTML += `
-                    <div class="group/avatar flex items-center bg-slate-50 border border-slate-100 rounded-full p-1 transition-all duration-500 ease-out hover:pr-5 hover:shadow-md hover:${borderColor} cursor-default flex-shrink-0">
-                        <img src="${member.foto}" class="w-9 h-9 md:w-10 md:h-10 rounded-full object-cover grayscale group-hover/avatar:grayscale-0 transition-all bg-slate-200" alt="${member.nama}">
-                        <div class="overflow-hidden max-w-0 group-hover/avatar:max-w-[150px] transition-all duration-500 ease-out">
-                            <div class="flex flex-col whitespace-nowrap pl-3 pr-1">
-                                <span class="text-[10px] font-bold text-slate-600 truncate">${member.nama.split(" ")[0]}</span>
-                                <span class="text-[8px] ${textColor} font-bold uppercase tracking-wider">${member.role}</span>
-                            </div>
-                        </div>
-                    </div>
-                    `;
+    function renderRoadshow(rows) {
+        const container = document.getElementById('roadshow-container');
+        container.innerHTML = ""; 
+
+        let volunteers = [];
+        
+        // --- LOOP 1: MENGAMBIL DATA VOLUNTEER ---
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            if (!row) continue;
+
+            // Mapping Kolom Volunteer:
+            // Nama (B=1), Sekolah (F=5), Foto (G=6), Role (H=7), Confirm (I=8)
+            const nama = getSafeValue(row.c[1]); 
+            const confirmStatus = getSafeValue(row.c[8]); 
+
+            // Filter header & baris kosong
+            if (nama === "Nama" || nama === "") continue;
+
+            if (confirmStatus === "☑ Accepted") {
+                volunteers.push({
+                    nama: nama,
+                    sekolah: getSafeValue(row.c[5]), 
+                    foto: getDirectDriveLink(getSafeValue(row.c[6])), 
+                    role: getRole(row.c[7]) 
                 });
-                return avatarsHTML;
             }
+        }
 
-            function openSchedule(imageSrc) {
-                const modal = document.getElementById('scheduleModal');
-                const overlay = document.getElementById('modalOverlay');
-                const content = document.getElementById('modalContent');
-                const img = document.getElementById('scheduleImage');
+        let hasSchool = false;
+
+        // --- LOOP 2: MENGAMBIL DATA LOKASI/SEKOLAH ---
+        for (let i = 0; i < rows.length; i++) {
+            const row = rows[i];
+            if (!row) continue;
+
+            // Mapping Kolom Sekolah:
+            // Nama Sekolah (J=9), Tanggal (K=10), Waktu (L=11), Maps (M=12)
+            // Foto Cover (N=13), Foto Jadwal (O=14), Status (P=15)
+            
+            const namaSekolah = getSafeValue(row.c[9]); 
+
+            if (namaSekolah === "Nama Sekolah/Lokasi" || !namaSekolah) continue;
+
+            hasSchool = true;
+            
+            // GUNAKAN FUNGSI BARU UNTUK TANGGAL DI SINI
+            const tanggal = getFormattedDate(row.c[10]);
+            
+            const waktu = getSafeValue(row.c[11]) || "TBA";
+            const mapsLink = getSafeValue(row.c[12]) || "#";
+            
+            const gambarRaw = getSafeValue(row.c[13]);
+            const gambarSekolah = gambarRaw ? getDirectDriveLink(gambarRaw) : "https://via.placeholder.com/400x300?text=No+Image";
+            
+            const jadwalRaw = getSafeValue(row.c[14]);
+            let popupImageSrc = jadwalRaw ? getDirectDriveLink(jadwalRaw) : "https://via.placeholder.com/600x800?text=Jadwal+Not+Available";
+
+            const statusRaw = getSafeValue(row.c[15]) || "⚠ Closed";
+
+            const mapEmbedSrc = `https://maps.google.com/maps?q=$${encodeURIComponent(namaSekolah)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+
+            // Filter volunteer berdasarkan sekolah
+            const teamOnSite = volunteers.filter(v => v.sekolah === namaSekolah);
+
+            // LOGIC BADGE & BUTTON
+            let badgeHTML = "";
+            let buttonHTML = "";
+
+            if (statusRaw === "☐ Open") {
+                badgeHTML = `
+                    <div class="px-4 py-1.5 rounded-full bg-white/95 border border-teal-100 text-teal-500 shadow-sm flex items-center gap-2 backdrop-blur-md">
+                        <span class="relative flex h-1.5 w-1.5">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-500"></span>
+                        </span>
+                        <span class="text-[9px] font-black tracking-[0.2em] uppercase">OPEN</span>
+                    </div>`;
                 
-                img.src = imageSrc; 
+                buttonHTML = `
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdBIVhz0RrSog8_DZgYzuj1FwWS9igS2OI4WVX_UfUslHWtVw/viewform?usp=publish-editor" class="group/btn relative w-full py-3 md:py-4 rounded-xl md:rounded-2xl bg-white text-slate-500 border border-slate-200 shadow-sm overflow-hidden active:scale-[0.98] transition-all duration-300 flex items-center justify-center">
+                        <div class="absolute inset-0 bg-gradient-to-r from-[#A7D8F9] via-[#E0C3FC] to-[#A7D8F9] bg-[length:200%_auto] opacity-0 group-hover/btn:opacity-100 group-hover/btn:animate-[text-shimmer_3s_linear_infinite] transition-opacity duration-300"></div>
+                        <div class="relative z-10 flex items-center justify-center gap-2 group-hover/btn:text-white transition-colors duration-300">
+                            <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase">Daftar Volunteer</span>
+                            <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </div>
+                    </a>`;
+            } else if (statusRaw === "☑ Confirmed") {
+                badgeHTML = `
+                    <div class="px-4 py-1.5 rounded-full bg-emerald-50/95 border border-emerald-100 text-emerald-600 shadow-sm flex items-center gap-2 backdrop-blur-md">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        <span class="text-[9px] font-black tracking-[0.2em] uppercase">SELESAI</span>
+                    </div>`;
 
-                modal.classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-                setTimeout(() => {
-                    overlay.classList.remove('opacity-0');
-                    content.classList.remove('scale-95', 'opacity-0');
-                    content.classList.add('scale-100', 'opacity-100');
-                }, 10);
+                buttonHTML = `
+                    <div class="w-full py-3 md:py-4 rounded-xl md:rounded-2xl bg-emerald-50 border border-emerald-100 text-emerald-400 flex items-center justify-center cursor-default opacity-80">
+                        <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase">Kegiatan Selesai</span>
+                    </div>`;
+            } else {
+                badgeHTML = `
+                    <div class="px-4 py-1.5 rounded-full bg-slate-100/95 border border-slate-200 text-slate-400 shadow-sm flex items-center gap-2 backdrop-blur-md">
+                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path></svg>
+                        <span class="text-[9px] font-black tracking-[0.2em] uppercase">CLOSED</span>
+                    </div>`;
+
+                buttonHTML = `
+                    <div class="w-full py-3 md:py-4 rounded-xl md:rounded-2xl bg-slate-100 border border-slate-200 text-slate-400 flex items-center justify-center cursor-not-allowed">
+                        <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase">Tidak Tersedia</span>
+                    </div>`;
             }
 
-            function closeSchedule() {
-                const modal = document.getElementById('scheduleModal');
-                const overlay = document.getElementById('modalOverlay');
-                const content = document.getElementById('modalContent');
-                overlay.classList.add('opacity-0');
-                content.classList.remove('scale-100', 'opacity-100');
-                content.classList.add('scale-95', 'opacity-0');
-                setTimeout(() => {
-                    modal.classList.add('hidden');
-                    document.body.style.overflow = '';
-                }, 300);
-            }
-        </script>
-    </section>
+            // RENDER CARD HTML
+            const cardHTML = `
+            <div class="w-[85vw] max-w-[340px] md:w-[380px] md:max-w-none flex-none snap-center group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 flex flex-col relative isolate transform-gpu">
+                
+                <div class="absolute top-5 left-5 z-40 pointer-events-none">
+                    ${badgeHTML}
+                </div>
+
+                <button onclick="openSchedule('${popupImageSrc}')" class="absolute top-5 right-5 z-40 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-md border border-slate-100 text-[#6D7D9B] shadow-sm flex items-center justify-center hover:scale-110 hover:text-[#A7D8F9] transition-all duration-300 group/icon cursor-pointer" title="Lihat Jadwal">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line>
+                    </svg>
+                </button>
+
+                <div class="relative h-60 md:h-72 w-full overflow-hidden rounded-t-[2.5rem] z-0 backface-hidden" style="transform: translateZ(0); -webkit-mask-image: -webkit-radial-gradient(white, black); mask-image: radial-gradient(white, black);">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-20 opacity-90 pointer-events-none"></div>
+                        <img src="${gambarSekolah}" alt="${namaSekolah}" loading="lazy" referrerpolicy="no-referrer" class="relative z-10 w-full h-full object-cover origin-center group-hover:scale-110 transition-transform duration-700 ease-in-out will-change-transform">
+                    </div>
+
+                <div class="px-6 pb-6 md:px-8 md:pb-8 flex flex-col flex-1 -mt-12 relative z-30">
+                    
+                    <div class="bg-white/90 backdrop-blur-xl border border-white p-5 md:p-6 rounded-3xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)] mb-5">
+                        <h3 class="text-xl md:text-2xl font-black text-[#6D7D9B] leading-tight mb-3 group-hover:text-[#A7D8F9] transition-colors duration-300">
+                            ${namaSekolah}
+                        </h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex flex-col">
+                                <span class="text-[9px] font-bold text-slate-300 uppercase tracking-widest mb-1">Tanggal</span>
+                                <div class="flex items-center gap-1.5 text-slate-500">
+                                    <svg class="w-3.5 h-3.5 text-[#A7D8F9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                                    <span class="text-xs md:text-sm font-bold">${tanggal}</span>
+                                </div>
+                            </div>
+                            <div class="flex flex-col border-l border-slate-100 pl-3">
+                                <span class="text-[9px] font-bold text-slate-300 uppercase tracking-widest mb-1">Waktu</span>
+                                <div class="flex items-center gap-1.5 text-slate-500">
+                                    <svg class="w-3.5 h-3.5 text-[#E0C3FC]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                                    <span class="text-xs md:text-sm font-bold">${waktu}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mb-6 group/map relative w-full h-28 md:h-32 rounded-2xl overflow-hidden border border-slate-100 bg-slate-50 shadow-inner">
+                        <iframe 
+                            src="${mapEmbedSrc}" 
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+                            class="w-full h-full grayscale opacity-60 group-hover/map:grayscale-0 group-hover/map:opacity-100 transition-all duration-500 ease-out">
+                        </iframe>
+                        <a href="${mapsLink}" target="_blank" class="absolute inset-0 z-10 flex items-center justify-center bg-slate-900/0 group-hover/map:bg-slate-900/10 transition-all duration-300">
+                            <span class="opacity-0 group-hover/map:opacity-100 translate-y-4 group-hover/map:translate-y-0 transition-all duration-500 bg-white/95 backdrop-blur text-[#6D7D9B] text-[9px] font-bold uppercase tracking-widest px-3 py-1.5 rounded-full shadow-md flex items-center gap-1.5">
+                                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                                Buka Peta
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="mt-auto">
+                        <div class="flex flex-col mb-5">
+                            <span class="text-[9px] font-bold text-slate-300 uppercase tracking-widest mb-2">Team on Site (${teamOnSite.length})</span>
+                            <div class="flex flex-nowrap gap-1.5 overflow-x-auto overflow-y-hidden py-2 px-1 scrollbar-hide items-center">
+                                ${generateTeamAvatars(teamOnSite)}
+                                <div class="w-2 flex-shrink-0"></div>
+                            </div>
+                        </div>
+                        ${buttonHTML}
+                    </div>
+                </div>
+            </div>
+            `;
+            container.insertAdjacentHTML('beforeend', cardHTML);
+        }
+
+        if (hasSchool) {
+            container.insertAdjacentHTML('beforeend', `
+            <div class="w-[85vw] max-w-[340px] md:w-[380px] md:max-w-none flex-none snap-center group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm transition-all duration-500 flex flex-col justify-center items-center h-auto min-h-[500px]">
+                <span class="text-slate-300 font-bold uppercase tracking-widest text-xs">Lokasi Berikutnya</span>
+            </div>`);
+        }
+    }
+
+    function generateTeamAvatars(team) {
+        if (!team || team.length === 0) {
+            return `<span class="text-xs text-slate-400 italic">Belum ada team.</span>`;
+        }
+        let avatarsHTML = "";
+        const borders = ['border-blue-100', 'border-purple-100', 'border-amber-100', 'border-pink-100', 'border-teal-100'];
+        const textColors = ['text-blue-400', 'text-purple-400', 'text-amber-400', 'text-pink-400', 'text-teal-400'];
+
+        team.forEach((member, index) => {
+            const borderColor = borders[index % borders.length];
+            const textColor = textColors[index % textColors.length];
+            
+            avatarsHTML += `
+            <div class="group/avatar flex items-center bg-slate-50 border border-slate-100 rounded-full p-1 transition-all duration-500 ease-out hover:pr-5 hover:shadow-md hover:${borderColor} cursor-default flex-shrink-0">
+                <img src="${member.foto}" class="w-9 h-9 md:w-10 md:h-10 rounded-full object-cover grayscale group-hover/avatar:grayscale-0 transition-all bg-slate-200" alt="${member.nama}">
+                <div class="overflow-hidden max-w-0 group-hover/avatar:max-w-[150px] transition-all duration-500 ease-out">
+                    <div class="flex flex-col whitespace-nowrap pl-3 pr-1">
+                        <span class="text-[10px] font-bold text-slate-600 truncate">${member.nama.split(" ")[0]}</span>
+                        <span class="text-[8px] ${textColor} font-bold uppercase tracking-wider">${member.role}</span>
+                    </div>
+                </div>
+            </div>
+            `;
+        });
+        return avatarsHTML;
+    }
+
+    function openSchedule(imageSrc) {
+        const modal = document.getElementById('scheduleModal');
+        const overlay = document.getElementById('modalOverlay');
+        const content = document.getElementById('modalContent');
+        const img = document.getElementById('scheduleImage');
+        
+        img.src = imageSrc; 
+
+        modal.classList.remove('hidden');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => {
+            overlay.classList.remove('opacity-0');
+            content.classList.remove('scale-95', 'opacity-0');
+            content.classList.add('scale-100', 'opacity-100');
+        }, 10);
+    }
+
+    function closeSchedule() {
+        const modal = document.getElementById('scheduleModal');
+        const overlay = document.getElementById('modalOverlay');
+        const content = document.getElementById('modalContent');
+        overlay.classList.add('opacity-0');
+        content.classList.remove('scale-100', 'opacity-100');
+        content.classList.add('scale-95', 'opacity-0');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }, 300);
+    }
+</script>
+        </section>
         
     <section id="pendaftaran" class="relative w-full py-24 md:py-32 bg-[#fafdfd] overflow-hidden flex flex-col justify-center items-center">
     
