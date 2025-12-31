@@ -1059,8 +1059,16 @@
 
     <style>
         @keyframes scaleIn {
-            from { opacity: 0; transform: scale(0.9); }
+            from { opacity: 0; transform: scale(0.95); }
             to { opacity: 1; transform: scale(1); }
+        }
+        /* Sembunyikan scrollbar tapi tetap bisa di-scroll */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
     </style>
       
@@ -1069,7 +1077,7 @@
 
     <div class="container mx-auto px-6 relative z-10">
         
-        <div class="text-center mb-16 md:mb-24 animate-[fadeInUp_1s_ease-out]">
+        <div class="text-center mb-10 md:mb-24 animate-[fadeInUp_1s_ease-out]">
             <span class="px-5 py-2 rounded-full border border-blue-100 bg-white shadow-sm inline-flex items-center gap-2">
                 <span class="relative flex h-2 w-2">
                 <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
@@ -1084,9 +1092,9 @@
             </h2>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-center">
+        <div class="flex md:grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 overflow-x-auto md:overflow-visible pb-8 md:pb-0 -mx-6 px-6 md:mx-0 md:px-0 snap-x snap-mandatory scrollbar-hide">
 
-            <div class="group bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_25px_50px_-12px_rgba(167,216,249,0.25)] hover:-translate-y-2 transition-all duration-700 flex flex-col h-full relative isolate">
+            <div class="min-w-[85vw] md:min-w-0 snap-center group bg-white rounded-[2.5rem] border border-slate-100 shadow-[0_10px_40px_-10px_rgba(0,0,0,0.05)] hover:shadow-[0_25px_50px_-12px_rgba(167,216,249,0.25)] hover:-translate-y-2 transition-all duration-700 flex flex-col h-full relative isolate">
                 
                 <div class="absolute top-6 left-6 z-30">
                     <div class="px-5 py-2 rounded-full bg-white border border-teal-100 text-teal-500 shadow-lg flex items-center gap-2 backdrop-blur-md">
@@ -1098,11 +1106,12 @@
                     </div>
                 </div>
 
-                <button onclick="openSchedule('images/SMAN1Purwokerto.png')" class="absolute top-6 right-6 z-30 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-white shadow-lg flex items-center justify-center text-[#6D7D9B] hover:text-white hover:bg-gradient-to-br hover:from-[#A7D8F9] hover:to-[#E0C3FC] hover:scale-110 transition-all duration-300 group/schedule" title="Lihat Jadwal">
+                <button onclick="openSchedule('images/SMAN1Purwokerto.jpg')" class="absolute top-6 right-6 z-30 w-12 h-12 rounded-full bg-white/80 backdrop-blur-md border border-white shadow-lg flex items-center justify-center text-[#6D7D9B] hover:text-white hover:bg-gradient-to-br hover:from-[#A7D8F9] hover:to-[#E0C3FC] hover:scale-110 transition-all duration-300 group/schedule" title="Lihat Jadwal">
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                     </svg>
                 </button>
+
                 <div class="relative h-72 w-full overflow-hidden rounded-t-[2.5rem]">
                     <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10 opacity-80 pointer-events-none"></div>
                     <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzERq161ct0JNMyuAjruex4bVyuHK56TM2N2m-IZpHMMIpCshMm55xAg2CXYU6-MuQZGhwMB_ozCJ8h5O0QHfdPHQmS65ysGCkaG9hxtojzUvWx2AqCQT-kAoAntXVb9Ck7lFBM=w408-h306-k-no" 
@@ -1158,22 +1167,10 @@
                                         <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden bg-slate-100 cursor-help">
                                             <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100&h=100" class="w-full h-full object-cover">
                                         </div>
-                                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max opacity-0 group-hover/avatar:opacity-100 translate-y-2 group-hover/avatar:translate-y-0 transition-all duration-300 pointer-events-none">
-                                            <div class="bg-slate-800 text-white text-[10px] py-1.5 px-3 rounded-lg shadow-xl">
-                                                <span class="font-bold text-[#A7D8F9]">Sarah</span> <span class="opacity-50 mx-1">|</span> Speaker
-                                            </div>
-                                            <div class="w-2 h-2 bg-slate-800 rotate-45 absolute -bottom-1 left-1/2 -translate-x-1/2"></div>
-                                        </div>
                                     </div>
                                     <div class="relative group/avatar z-20 hover:z-50 transition-all">
                                         <div class="w-10 h-10 rounded-full border-2 border-white shadow-sm overflow-hidden bg-slate-100 cursor-help">
                                             <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&q=80&w=100&h=100" class="w-full h-full object-cover">
-                                        </div>
-                                        <div class="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 w-max opacity-0 group-hover/avatar:opacity-100 translate-y-2 group-hover/avatar:translate-y-0 transition-all duration-300 pointer-events-none">
-                                            <div class="bg-slate-800 text-white text-[10px] py-1.5 px-3 rounded-lg shadow-xl">
-                                                <span class="font-bold text-[#E0C3FC]">Budi</span> <span class="opacity-50 mx-1">|</span> Logistic
-                                            </div>
-                                            <div class="w-2 h-2 bg-slate-800 rotate-45 absolute -bottom-1 left-1/2 -translate-x-1/2"></div>
                                         </div>
                                     </div>
                                 </div>
@@ -1181,9 +1178,7 @@
                         </div>
 
                         <button class="group/btn relative w-full py-4 rounded-2xl bg-white text-slate-500 border border-slate-200 shadow-sm overflow-hidden active:scale-[0.98] transition-all duration-300">
-                            
                             <div class="absolute inset-0 bg-gradient-to-r from-[#A7D8F9] via-[#E0C3FC] to-[#A7D8F9] bg-[length:200%_auto] opacity-0 group-hover/btn:opacity-100 group-hover/btn:animate-[text-shimmer_3s_linear_infinite] transition-opacity duration-300"></div>
-                            
                             <div class="relative z-10 flex items-center justify-center gap-2 group-hover/btn:text-white transition-colors duration-300">
                                 <span class="text-sm font-bold tracking-[0.2em] uppercase">Daftar Volunteer</span>
                                 <svg class="w-4 h-4 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
@@ -1192,15 +1187,17 @@
                     </div>
                 </div>
             </div>
-        </div>
+            
+            </div>
     </div>
 
     <div id="schedulePopup" class="fixed inset-0 z-[100] hidden items-center justify-center p-4 sm:p-8">
         <div class="absolute inset-0 bg-slate-900/40 backdrop-blur-sm transition-opacity duration-300" onclick="closeSchedule()"></div>
         
-        <div class="relative z-10 bg-white rounded-[2rem] shadow-2xl overflow-hidden max-w-4xl w-auto mx-auto animate-[scaleIn_0.3s_ease-out]">
-             <button onclick="closeSchedule()" class="absolute top-4 right-4 w-10 h-10 rounded-full bg-black/10 hover:bg-black/20 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 z-20">
-                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        <div class="relative z-10 bg-white rounded-2xl shadow-2xl overflow-hidden max-w-4xl w-auto mx-auto animate-[scaleIn_0.3s_ease-out]">
+             
+             <button onclick="closeSchedule()" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/10 hover:bg-black/20 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 z-20">
+                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
              </button>
              
              <div class="relative w-full h-full flex items-center justify-center bg-slate-50">
@@ -1213,42 +1210,26 @@
         function openSchedule(imagePath) {
             const popup = document.getElementById('schedulePopup');
             const popupImg = document.getElementById('scheduleImage');
-            
-            // Set path gambar
             popupImg.src = imagePath;
-            
-            // Tampilkan popup
             popup.classList.remove('hidden');
             popup.classList.add('flex');
-            
-            // Matikan scroll pada body utama
             document.body.style.overflow = 'hidden';
         }
 
         function closeSchedule() {
             const popup = document.getElementById('schedulePopup');
-            
-            // Sembunyikan popup
             popup.classList.add('hidden');
             popup.classList.remove('flex');
-            
-            // Hidupkan kembali scroll pada body utama
             document.body.style.overflow = '';
-            
-            // Reset gambar (opsional, untuk kebersihan)
-            setTimeout(() => {
-                document.getElementById('scheduleImage').src = '';
-            }, 300);
+            setTimeout(() => { document.getElementById('scheduleImage').src = ''; }, 300);
         }
 
-        // Tutup popup dengan tombol ESC
         document.addEventListener('keydown', function(event) {
-            if (event.key === "Escape") {
-                closeSchedule();
-            }
+            if (event.key === "Escape") closeSchedule();
         });
     </script>
-    </section>
+
+</section>
         
     <section id="pendaftaran" class="relative w-full py-24 md:py-32 bg-[#fafdfd] overflow-hidden flex flex-col justify-center items-center">
     
