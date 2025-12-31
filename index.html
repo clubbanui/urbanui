@@ -1057,8 +1057,8 @@
 
     <section id="roadshow" class="relative w-full py-16 md:py-32 bg-[#fafdfd] overflow-hidden">
     
-    <div class="absolute top-40 right-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#A7D8F9] rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px] opacity-20 animate-pulse pointer-events-none transform-gpu translate-z-0"></div>
-    <div class="absolute bottom-40 left-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#E0C3FC] rounded-full mix-blend-multiply filter blur-[60px] md:blur-[100px] opacity-20 animate-pulse pointer-events-none transform-gpu translate-z-0" style="animation-delay: 2s;"></div>
+    <div class="absolute top-40 right-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#A7D8F9] rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse pointer-events-none transform-gpu translate-z-0"></div>
+    <div class="absolute bottom-40 left-0 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#E0C3FC] rounded-full mix-blend-multiply filter blur-[80px] opacity-20 animate-pulse pointer-events-none transform-gpu translate-z-0" style="animation-delay: 2s;"></div>
 
     <div class="container mx-auto relative z-10">
         
@@ -1077,12 +1077,12 @@
             </h2>
         </div>
 
-        <div class="flex flex-nowrap gap-5 overflow-x-auto pb-12 -mx-6 px-6 md:mx-0 md:px-10 snap-x snap-mandatory scrollbar-hide w-full items-stretch" style="-webkit-overflow-scrolling: touch;">
+        <div class="flex flex-nowrap gap-5 overflow-x-auto pb-12 px-8 md:px-10 snap-x snap-mandatory scrollbar-hide w-full items-stretch" style="-webkit-overflow-scrolling: touch;">
 
-            <div class="w-[85vw] max-w-[340px] md:w-[380px] md:max-w-none flex-none snap-center group bg-white rounded-[2rem] md:rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-500 flex flex-col relative isolate transform-gpu">
+            <div class="w-[85vw] max-w-[340px] md:w-[380px] md:max-w-none flex-none snap-center group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-[0_20px_40px_-12px_rgba(167,216,249,0.3)] hover:-translate-y-2 transition-all duration-500 flex flex-col relative isolate transform-gpu">
                 
-                <div class="absolute top-5 left-5 z-30">
-                    <div class="px-4 py-1.5 rounded-full bg-white/90 border border-teal-100 text-teal-500 shadow-sm flex items-center gap-2 backdrop-blur-md">
+                <div class="absolute top-5 left-5 z-40 pointer-events-none">
+                    <div class="px-4 py-1.5 rounded-full bg-white/95 border border-teal-100 text-teal-500 shadow-sm flex items-center gap-2 backdrop-blur-md">
                         <span class="relative flex h-1.5 w-1.5">
                             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-teal-400 opacity-75"></span>
                             <span class="relative inline-flex rounded-full h-1.5 w-1.5 bg-teal-500"></span>
@@ -1091,7 +1091,7 @@
                     </div>
                 </div>
 
-                <button onclick="openSchedule('SMAN1Purwokerto.png')" class="absolute top-5 right-5 z-30 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-md border border-slate-100 text-[#6D7D9B] shadow-sm flex items-center justify-center hover:scale-110 hover:text-[#A7D8F9] transition-all duration-300 group/icon">
+                <button onclick="openSchedule('SMAN1Purwokerto.png')" class="absolute top-5 right-5 z-40 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-md border border-slate-100 text-[#6D7D9B] shadow-sm flex items-center justify-center hover:scale-110 hover:text-[#A7D8F9] transition-all duration-300 group/icon cursor-pointer">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
                         <line x1="16" y1="2" x2="16" y2="6"></line>
@@ -1100,17 +1100,18 @@
                     </svg>
                 </button>
 
-                <div class="relative h-56 md:h-72 w-full overflow-hidden rounded-t-[2rem] md:rounded-t-[2.5rem]">
-                    <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-10 opacity-80 pointer-events-none"></div>
+                <div class="relative h-60 md:h-72 w-full overflow-hidden rounded-t-[2.5rem] z-10" style="-webkit-mask-image: -webkit-radial-gradient(white, black); mask-image: radial-gradient(white, black);">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent z-20 opacity-90 pointer-events-none"></div>
+                    
                     <img src="https://lh3.googleusercontent.com/gps-cs-s/AG0ilSzERq161ct0JNMyuAjruex4bVyuHK56TM2N2m-IZpHMMIpCshMm55xAg2CXYU6-MuQZGhwMB_ozCJ8h5O0QHfdPHQmS65ysGCkaG9hxtojzUvWx2AqCQT-kAoAntXVb9Ck7lFBM=w408-h306-k-no" 
                         alt="Location" 
                         loading="lazy"
-                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000 ease-in-out">
+                        class="relative z-10 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-in-out">
                 </div>
 
-                <div class="px-6 pb-6 md:px-8 md:pb-8 flex flex-col flex-1 -mt-10 relative z-20">
+                <div class="px-6 pb-6 md:px-8 md:pb-8 flex flex-col flex-1 -mt-12 relative z-30">
                     
-                    <div class="bg-white/95 backdrop-blur-md border border-white p-5 md:p-6 rounded-2xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07)] mb-5">
+                    <div class="bg-white/90 backdrop-blur-xl border border-white p-5 md:p-6 rounded-3xl shadow-[0_2px_15px_-3px_rgba(0,0,0,0.05)] mb-5">
                         <h3 class="text-xl md:text-2xl font-black text-[#6D7D9B] leading-tight mb-3 group-hover:text-[#A7D8F9] transition-colors duration-300">
                             SMAN 1 Purwokerto
                         </h3>
@@ -1133,7 +1134,7 @@
                         </div>
                     </div>
 
-                    <div class="mb-6 group/map relative w-full h-28 md:h-32 rounded-xl overflow-hidden border border-slate-100 bg-slate-50">
+                    <div class="mb-6 group/map relative w-full h-28 md:h-32 rounded-2xl overflow-hidden border border-slate-100 bg-slate-50 shadow-inner">
                         <iframe 
                             src="https://maps.google.com/maps?q=SMAN+1+Purwokerto&t=&z=13&ie=UTF8&iwloc=&output=embed" 
                             width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
@@ -1158,7 +1159,7 @@
                     </div>
                 </div>
             </div>
-            <div class="w-[85vw] max-w-[340px] md:w-[380px] md:max-w-none flex-none snap-center group bg-white rounded-[2rem] md:rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-center items-center h-auto min-h-[500px]">
+            <div class="w-[85vw] max-w-[340px] md:w-[380px] md:max-w-none flex-none snap-center group bg-white rounded-[2.5rem] border border-slate-100 shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col justify-center items-center h-auto min-h-[500px]">
                 <span class="text-slate-300 font-bold uppercase tracking-widest text-xs">Lokasi Berikutnya</span>
             </div>
 
