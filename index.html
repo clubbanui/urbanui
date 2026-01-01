@@ -1101,47 +1101,44 @@
             </style>
 
             <script>
-    // --- KONFIGURASI SUMBER DATA ---
+    // --- KONFIGURASI DATABASE ---
     
-    // 1. DATA SEKOLAH (SHEET BARU)
-    const SCHOOL_ID = "14U412nyGsK_gbtYDJ6T5xVhpZeB5gaAu";
-    const SCHOOL_GID = "0"; // Default tab pertama
-    
-    // 2. DATA VOLUNTEER (SHEET FORM)
-    const VOLUNTEER_ID = "1CDm9ycxOuhN52evEaMEC0Xf-LCR_74_l1ZrW224DgpY";
-    const VOLUNTEER_GID = "275945030";
+    // 1. SHEET SEKOLAH (DB LOKASI)
+    const SCHOOL_SHEET_ID = "14U412nyGsK_gbtYDJ6T5xVhpZeB5gaAu";
+    const SCHOOL_GID = "0"; // Asumsi sheet pertama
+
+    // 2. SHEET VOLUNTEER (DB PESERTA)
+    const VOLUNTEER_SHEET_ID = "1evR4QPeKZWJjBON0-6qT6mhwYypqt-FjX-cy5xf9iWo";
+    const VOLUNTEER_GID = "965565536";
 
     document.addEventListener("DOMContentLoaded", function() {
-        // Siapkan kedua URL fetch
-        const schoolUrl = `https://docs.google.com/spreadsheets/d/${SCHOOL_ID}/gviz/tq?tqx=out:json&gid=${SCHOOL_GID}&headers=0`;
-        const volunteerUrl = `https://docs.google.com/spreadsheets/d/${VOLUNTEER_ID}/gviz/tq?tqx=out:json&gid=${VOLUNTEER_GID}&headers=0`;
+        const schoolUrl = `https://docs.google.com/spreadsheets/d/${SCHOOL_SHEET_ID}/gviz/tq?tqx=out:json&gid=${SCHOOL_GID}&headers=0`;
+        const volunteerUrl = `https://docs.google.com/spreadsheets/d/${VOLUNTEER_SHEET_ID}/gviz/tq?tqx=out:json&gid=${VOLUNTEER_GID}&headers=0`;
 
-        // Ambil kedua data secara BERSAMAAN (Paralel)
+        // AMBIL KEDUA DATA BERSAMAAN
         Promise.all([
             fetch(schoolUrl).then(res => res.text()),
             fetch(volunteerUrl).then(res => res.text())
         ])
         .then(([schoolText, volunteerText]) => {
-            // Parse Data Sekolah
             const schoolJson = JSON.parse(schoolText.substring(47).slice(0, -2));
-            // Parse Data Volunteer
             const volunteerJson = JSON.parse(volunteerText.substring(47).slice(0, -2));
 
             if (!schoolJson.table || !volunteerJson.table) {
-                throw new Error("Struktur Data Invalid");
+                console.error("Error Structure");
+                return;
             }
 
             // Render dengan mengirim kedua data
             renderRoadshow(schoolJson.table.rows, volunteerJson.table.rows);
         })
         .catch(err => {
-            console.error("Error loading data:", err);
-            document.getElementById('roadshow-container').innerHTML = `<div class="w-full text-center text-red-400">Gagal memuat data (Cek Link/Permission).</div>`;
+            console.error("Gagal mengambil data:", err);
+            document.getElementById('roadshow-container').innerHTML = `<div class="w-full text-center text-red-400">Gagal memuat data database.</div>`;
         });
     });
 
     // --- HELPER FUNCTIONS ---
-    
     function getDirectDriveLink(driveUrl) {
         if (!driveUrl) return "";
         const strUrl = String(driveUrl).trim();
@@ -1156,31 +1153,25 @@
 
     function getSafeValue(cell) {
         if (!cell) return "";
-        if (cell.f) return cell.f; 
+        if (cell.f) return cell.f;
         if (cell.v !== null && cell.v !== undefined) return String(cell.v);
         return "";
     }
 
-    // Logic Tanggal Pintar
     function getAnyDate(cell) {
         if (!cell) return "-";
-        
-        // Cek Header
+        // Filter Header Tanggal
         if (cell.v === "Tanggal" || cell.v === "Date" || cell.v === "TANGGAL") return "HEADER_DETECTED";
-
-        if (cell.f) return cell.f; 
         
+        if (cell.f) return cell.f;
         if (cell.v !== null && cell.v !== undefined) {
             const val = String(cell.v);
             if (val.startsWith("Date(")) {
                 try {
                     const parts = val.match(/Date\((\d+),(\d+),(\d+)\)/);
                     if (parts) {
-                        const year = parts[1];
-                        const monthIdx = parseInt(parts[2]);
-                        const day = parts[3];
                         const months = ["Jan", "Feb", "Mar", "Apr", "Mei", "Jun", "Jul", "Agt", "Sep", "Okt", "Nov", "Des"];
-                        return `${day} ${months[monthIdx]} ${year}`;
+                        return `${parts[3]} ${months[parseInt(parts[2])]} ${parts[1]}`;
                     }
                 } catch (e) { return val; }
             }
@@ -1194,43 +1185,39 @@
         return val ? val : "Volunteer";
     }
 
-    // --- MAIN RENDER FUNCTION ---
+    // --- FUNGSI UTAMA RENDER ---
     function renderRoadshow(schoolRows, volunteerRows) {
         const container = document.getElementById('roadshow-container');
         container.innerHTML = ""; 
 
-        // 1. PROSES DATA VOLUNTEER DULU (Disimpan di Memory)
-        // Mapping Volunteer (Asumsi Sesuai Form Sebelumnya):
-        // Nama (B=1), Sekolah (F=5), Foto (G=6), Role (H=7), Confirm (I=8)
+        // 1. OLAH DATA VOLUNTEER DULU (Sheet 1)
+        // Struktur: Nama(B=1), Sekolah(F=5), Foto(G=6), Role(H=7), Status(I=8)
         let volunteers = [];
         
         for (let i = 0; i < volunteerRows.length; i++) {
             const row = volunteerRows[i];
             if (!row) continue;
 
-            const nama = getSafeValue(row.c[1]); // Kolom B
-            
-            // Filter Header Volunteer
-            if (!nama || nama === "Nama" || nama === "Name" || nama.includes("Nama Lengkap")) continue;
+            const nama = getSafeValue(row.c[1]); 
+            // Header Killer untuk Volunteer
+            if (!nama || nama === "Nama" || nama.includes("Nama Lengkap")) continue;
 
-            const confirmStatus = getSafeValue(row.c[8]); // Kolom I
+            const confirmStatus = getSafeValue(row.c[8]); 
 
             if (confirmStatus === "☑ Accepted") {
                 volunteers.push({
                     nama: nama,
-                    sekolah: getSafeValue(row.c[5]), // Kolom F (Kunci pencocokan dengan Sekolah)
+                    sekolah: getSafeValue(row.c[5]), // Kunci pencocokan dengan data sekolah
                     foto: getDirectDriveLink(getSafeValue(row.c[6])), 
                     role: getRole(row.c[7]) 
                 });
             }
         }
 
-        // 2. PROSES DATA SEKOLAH & GABUNGKAN
-        // Mapping Sekolah (Sesuai Request Baru):
-        // Nama(A=0), Tanggal(B=1), Waktu(C=2), Maps(D=3), Cover(E=4), Popup(F=5), Status(G=6)
-        
         let hasSchool = false;
 
+        // 2. OLAH DATA SEKOLAH (Sheet 2)
+        // Mapping Baru: A=0, B=1, C=2, D=3, E=4, F=5, G=6
         for (let i = 0; i < schoolRows.length; i++) {
             const row = schoolRows[i];
             if (!row) continue;
@@ -1238,9 +1225,9 @@
             const namaSekolah = getSafeValue(row.c[0]); // Kolom A
             const rawTanggal = getAnyDate(row.c[1]);    // Kolom B
 
-            // --- FILTER HEADER SEKOLAH ---
+            // HEADER KILLER LAYER (BUANG JUDUL KOLOM)
             if (!namaSekolah || 
-                namaSekolah.includes("Nama Sekolah") || 
+                namaSekolah === "Nama Sekolah/Lokasi" || 
                 namaSekolah === "Lokasi" ||
                 rawTanggal === "HEADER_DETECTED"
             ) {
@@ -1253,24 +1240,24 @@
             const waktu = getSafeValue(row.c[2]) || "TBA"; // Kolom C
             const mapsLink = getSafeValue(row.c[3]) || "#"; // Kolom D
             
-            const gambarRaw = getSafeValue(row.c[4]);      // Kolom E
+            const gambarRaw = getSafeValue(row.c[4]); // Kolom E (Cover)
             const gambarSekolah = gambarRaw ? getDirectDriveLink(gambarRaw) : "https://via.placeholder.com/400x300?text=No+Image";
             
-            const jadwalRaw = getSafeValue(row.c[5]);      // Kolom F
+            const jadwalRaw = getSafeValue(row.c[5]); // Kolom F (Popup)
             let popupImageSrc = jadwalRaw ? getDirectDriveLink(jadwalRaw) : "https://via.placeholder.com/600x800?text=Jadwal+Not+Available";
 
             const statusRaw = getSafeValue(row.c[6]) || "⚠ Closed"; // Kolom G
 
             const mapEmbedSrc = `https://maps.google.com/maps?q=$${encodeURIComponent(namaSekolah)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
 
-            // MATCHING: Cari volunteer yang 'sekolah'-nya sama dengan 'namaSekolah' ini
+            // MATCHING: Cari volunteer yang sekolahnya SAMA dengan sekolah ini
             const teamOnSite = volunteers.filter(v => v.sekolah === namaSekolah);
 
-            // LOGIC BADGE & BUTTON
+            // LOGIC TAMPILAN (Sama seperti sebelumnya)
             let badgeHTML = "";
             let buttonHTML = "";
 
-            if (statusRaw === "☐ Open" || statusRaw.toLowerCase().includes("open")) {
+            if (statusRaw === "☐ Open") {
                 badgeHTML = `
                     <div class="px-4 py-1.5 rounded-full bg-white/95 border border-teal-100 text-teal-500 shadow-sm flex items-center gap-2 backdrop-blur-md">
                         <span class="relative flex h-1.5 w-1.5">
@@ -1281,14 +1268,14 @@
                     </div>`;
                 
                 buttonHTML = `
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSfCLK1EfbE6Fp7Xr4-BLzmMy2G87ICZItnbDoJP_Pxb9CjRaA/viewform?usp=dialog" class="group/btn relative w-full py-3 md:py-4 rounded-xl md:rounded-2xl bg-white text-slate-500 border border-slate-200 shadow-sm overflow-hidden active:scale-[0.98] transition-all duration-300 flex items-center justify-center">
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdBIVhz0RrSog8_DZgYzuj1FwWS9igS2OI4WVX_UfUslHWtVw/viewform?usp=publish-editor" class="group/btn relative w-full py-3 md:py-4 rounded-xl md:rounded-2xl bg-white text-slate-500 border border-slate-200 shadow-sm overflow-hidden active:scale-[0.98] transition-all duration-300 flex items-center justify-center">
                         <div class="absolute inset-0 bg-gradient-to-r from-[#A7D8F9] via-[#E0C3FC] to-[#A7D8F9] bg-[length:200%_auto] opacity-0 group-hover/btn:opacity-100 group-hover/btn:animate-[text-shimmer_3s_linear_infinite] transition-opacity duration-300"></div>
                         <div class="relative z-10 flex items-center justify-center gap-2 group-hover/btn:text-white transition-colors duration-300">
                             <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase">Daftar Volunteer</span>
                             <svg class="w-3.5 h-3.5 transition-transform duration-300 group-hover/btn:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                         </div>
                     </a>`;
-            } else if (statusRaw === "☑ Confirmed" || statusRaw.toLowerCase().includes("confirmed")) {
+            } else if (statusRaw === "☑ Confirmed") {
                 badgeHTML = `
                     <div class="px-4 py-1.5 rounded-full bg-emerald-50/95 border border-emerald-100 text-emerald-600 shadow-sm flex items-center gap-2 backdrop-blur-md">
                         <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
