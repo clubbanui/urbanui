@@ -9,91 +9,114 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         .btn-shadow { box-shadow: 0 4px 14px 0 rgba(147, 197, 253, 0.5); }
+        
+        body.menu-open {
+            overflow: hidden;
+            height: 100vh;
+        }
     </style>
 </head>
 <body class="bg-[#FDFBFA]">
 
     <nav id="urbanNavbar" class="fixed top-0 left-0 w-full z-50 transition-transform duration-300 ease-in-out bg-white/70 backdrop-blur-md border-b border-white/40 shadow-sm">
-    <div class="flex items-center justify-between px-6 md:px-10 py-4 md:py-6 max-w-7xl mx-auto">
+        <div class="flex items-center justify-between px-6 md:px-10 py-4 md:py-6 max-w-7xl mx-auto">
+            
+            <div class="flex items-center gap-2 z-50">
+                <img 
+                    src="https://drive.google.com/thumbnail?id=1oX2MLRMfIM4uLAA9ApSquxXb_DB_DAjk&sz=w1000" 
+                    alt="Logo Urban" 
+                    class="h-10 w-auto object-contain drop-shadow-md hover:scale-110 hover:-rotate-6 transition-transform duration-300 ease-out"
+                >
+                <span class="font-black text-xl text-[#6D7D9B] tracking-tight">URBAN</span>
+            </div>
+
+            <div class="hidden md:flex items-center gap-8 text-slate-500 font-medium text-sm">
+                <a href="#beranda" class="hover:text-[#A7D8F9] transition-colors">Beranda</a>
+                <a href="#philosophy" class="hover:text-[#A7D8F9] transition-colors">About</a>
+                <a href="#struktur" class="hover:text-[#A7D8F9] transition-colors">Team</a>
+                <a href="#divisi" class="hover:text-[#A7D8F9] transition-colors">Division</a>
+                <a href="#kontak" class="hover:text-[#A7D8F9] transition-colors">Contact</a>
+                
+                <a href="#mainevent" class="px-6 py-2 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white font-bold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
+                    Join Main Event
+                </a>
+            </div>
+
+            <button id="mobileMenuBtn" class="md:hidden z-50 text-[#6D7D9B] focus:outline-none p-2 rounded-full hover:bg-slate-100 transition-colors">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobileMenu" class="fixed inset-0 z-[100] bg-white/95 backdrop-blur-2xl flex flex-col items-center justify-center opacity-0 pointer-events-none transition-all duration-500 transform scale-95 origin-center">
         
-        <div class="flex items-center gap-2 z-50">
-            <img 
-                src="https://drive.google.com/thumbnail?id=1oX2MLRMfIM4uLAA9ApSquxXb_DB_DAjk&sz=w1000" 
-                alt="Logo Urban" 
-                class="h-10 w-auto object-contain drop-shadow-md hover:scale-110 hover:-rotate-6 transition-transform duration-300 ease-out"
-            >
-            <span class="font-black text-xl text-[#6D7D9B] tracking-tight">URBAN</span>
-        </div>
+        <div class="absolute top-[-10%] right-[-10%] w-[50vw] h-[50vw] bg-blue-200/30 rounded-full blur-[80px] pointer-events-none"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[50vw] h-[50vw] bg-purple-200/30 rounded-full blur-[80px] pointer-events-none"></div>
 
-        <div class="hidden md:flex items-center gap-8 text-slate-500 font-medium text-sm">
-            <a href="#beranda" class="hover:text-[#A7D8F9] transition-colors">Beranda</a>
-            <a href="#philosophy" class="hover:text-[#A7D8F9] transition-colors">About</a>
-            <a href="#struktur" class="hover:text-[#A7D8F9] transition-colors">Team</a>
-            <a href="#divisi" class="hover:text-[#A7D8F9] transition-colors">Division</a>
-            <a href="#kontak" class="hover:text-[#A7D8F9] transition-colors">Contact</a>
-            <a href="#roadshow" class="px-6 py-2 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white font-bold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
-                Daftar Volunteer
-            </a>
-        </div>
-
-        <button id="mobileMenuBtn" class="md:hidden z-50 text-[#6D7D9B] focus:outline-none">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        <button id="closeMenuBtn" class="absolute top-6 right-6 p-2 rounded-full bg-slate-50 text-slate-400 hover:bg-red-50 hover:text-red-400 transition-all duration-300 shadow-sm">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
         </button>
+
+        <div class="flex flex-col items-center gap-8 relative z-10 w-full px-8">
+            <span class="text-[10px] font-bold text-slate-300 uppercase tracking-[0.4em] mb-4">Navigation</span>
+            
+            <a href="#beranda" class="mobile-link text-3xl font-black text-[#6D7D9B] hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#A7D8F9] hover:to-[#E0C3FC] transition-all duration-300">Beranda</a>
+            <a href="#divisi" class="mobile-link text-3xl font-black text-[#6D7D9B] hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#A7D8F9] hover:to-[#E0C3FC] transition-all duration-300">Divisi</a>
+            <a href="#timeline" class="mobile-link text-3xl font-black text-[#6D7D9B] hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#A7D8F9] hover:to-[#E0C3FC] transition-all duration-300">Timeline</a>
+            <a href="#struktur" class="mobile-link text-3xl font-black text-[#6D7D9B] hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#A7D8F9] hover:to-[#E0C3FC] transition-all duration-300">Team</a>
+            <a href="#kontak" class="mobile-link text-3xl font-black text-[#6D7D9B] hover:text-transparent hover:bg-clip-text hover:bg-gradient-to-r hover:from-[#A7D8F9] hover:to-[#E0C3FC] transition-all duration-300">Contact</a>
+            
+            <div class="h-px w-24 bg-slate-200 my-2"></div>
+
+            <a href="#mainevent" class="mobile-link w-full max-w-xs py-4 rounded-2xl bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white text-center font-bold text-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                Join Main Event
+            </a>
+        </div>
     </div>
 
-    <div id="mobileMenu" class="absolute top-0 left-0 w-full h-screen bg-white/95 backdrop-blur-xl flex flex-col items-center justify-center gap-8 text-lg font-bold text-[#6D7D9B] transition-all duration-500 -translate-y-full opacity-0 pointer-events-none md:hidden shadow-xl">
-        <a href="#beranda" class="mobile-link hover:text-[#A7D8F9]">Beranda</a>
-        <a href="#divisi" class="mobile-link hover:text-[#A7D8F9]">Divisi</a>
-        <a href="#timeline" class="mobile-link hover:text-[#A7D8F9]">Timeline</a>
-        <a href="#struktur" class="mobile-link hover:text-[#A7D8F9]">Panitia</a>
-        <a href="#kontak" class="mobile-link hover:text-[#A7D8F9]">Pertanyaan</a>
-        <a href="#roadshow">
-            Daftar Volunteer
-        </a>
-    </div>
-</nav>
+    <script>
+        let lastScrollTop = 0;
+        const navbar = document.getElementById('urbanNavbar');
 
-<script>
-    let lastScrollTop = 0;
-    const navbar = document.getElementById('urbanNavbar');
-
-    window.addEventListener('scroll', function() {
-        let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > lastScrollTop && scrollTop > 50) {
-            navbar.style.transform = 'translateY(-100%)';
-        } else {
-            navbar.style.transform = 'translateY(0)';
-        }
-        lastScrollTop = scrollTop;
-    });
-
-    const mobileBtn = document.getElementById('mobileMenuBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    const mobileLinks = document.querySelectorAll('.mobile-link');
-    let isMenuOpen = false;
-
-    mobileBtn.addEventListener('click', () => {
-        isMenuOpen = !isMenuOpen;
-        if (isMenuOpen) {
-            mobileMenu.classList.remove('-translate-y-full', 'opacity-0', 'pointer-events-none');
-            mobileBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>';
-        } else {
-            mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
-            mobileBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>';
-        }
-    });
-
-    mobileLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            isMenuOpen = false;
-            mobileMenu.classList.add('-translate-y-full', 'opacity-0', 'pointer-events-none');
-            mobileBtn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>';
+        window.addEventListener('scroll', function() {
+            let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollTop > lastScrollTop && scrollTop > 50) {
+                navbar.style.transform = 'translateY(-100%)';
+            } else {
+                navbar.style.transform = 'translateY(0)';
+            }
+            lastScrollTop = scrollTop;
         });
-    });
-</script>
+
+        const mobileBtn = document.getElementById('mobileMenuBtn');
+        const closeMenuBtn = document.getElementById('closeMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const body = document.body;
+
+        function openMenu() {
+            mobileMenu.classList.remove('opacity-0', 'pointer-events-none', 'scale-95');
+            mobileMenu.classList.add('opacity-100', 'pointer-events-auto', 'scale-100');
+            body.classList.add('menu-open');
+        }
+
+        function closeMenu() {
+            mobileMenu.classList.remove('opacity-100', 'pointer-events-auto', 'scale-100');
+            mobileMenu.classList.add('opacity-0', 'pointer-events-none', 'scale-95');
+            body.classList.remove('menu-open');
+        }
+
+        mobileBtn.addEventListener('click', openMenu);
+        closeMenuBtn.addEventListener('click', closeMenu);
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', closeMenu);
+        });
+    </script>
 
     <section id="beranda" class="relative w-full h-screen overflow-hidden flex flex-col justify-center items-center bg-gradient-to-b from-[#fafdfd] via-[#f8fbfd] to-[#f6fafa]">
 
@@ -182,7 +205,7 @@
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-[#6D7D9B]"></span>
                 </span>
                 <span class="text-[10px] md:text-xs font-bold tracking-[0.25em] uppercase text-slate-500">
-                    Official Recruitment • Batch 1
+                    Open Ticket
                 </span>
             </div>
         </div>
@@ -979,139 +1002,138 @@
         </section>
 
         <section id="merch" class="relative w-full py-24 md:py-32 bg-[#fafdfd] overflow-hidden">
-        
-        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
-            <div class="absolute top-[10%] -left-[10%] w-[500px] h-[500px] bg-blue-100/40 rounded-full blur-[100px] mix-blend-multiply animate-pulse"></div>
-            <div class="absolute bottom-[10%] -right-[10%] w-[500px] h-[500px] bg-purple-100/40 rounded-full blur-[100px] mix-blend-multiply animate-pulse" style="animation-delay: 2s;"></div>
-        </div>
-
-        <div class="container mx-auto px-6 relative z-10">
             
-            <div class="text-center mb-16 animate-[fadeInUp_1s_ease-out]">
-                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-rose-100 bg-white shadow-sm mb-6 animate-bounce">
-                    <span class="relative flex h-2 w-2">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
-                    </span>
-                    <span class="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-rose-400">
-                        Limited Pre-Order
-                    </span>
+            <div class="container mx-auto px-6 relative z-10">
+
+                <div class="text-center mb-16 animate-[fadeInUp_1s_ease-out]">
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-rose-100 bg-white shadow-sm mb-6 animate-bounce">
+                        <span class="relative flex h-2 w-2">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-rose-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2 w-2 bg-rose-500"></span>
+                        </span>
+                        <span class="text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase text-rose-400">
+                            Limited Pre-Order
+                        </span>
+                    </div>
+
+                    <h2 class="text-4xl md:text-6xl font-black text-[#6D7D9B] tracking-tight leading-none">
+                        OFFICIAL <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC]">MERCH</span>
+                    </h2>
+                    <p class="mt-4 text-slate-400 text-sm font-light uppercase tracking-widest">
+                        Urban 2026 Collection
+                    </p>
                 </div>
 
-                <h2 class="text-4xl md:text-6xl font-black text-[#6D7D9B] tracking-tight leading-none">
-                    OFFICIAL <span class="text-transparent bg-clip-text bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC]">MERCH</span>
-                </h2>
-                <p class="mt-4 text-slate-400 text-sm font-light uppercase tracking-widest">
-                    Urban 2026 Collection • Batch 1
-                </p>
-            </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
-
-            <div class="group relative bg-white/60 backdrop-blur-xl rounded-[2.5rem] border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(167,216,249,0.2)] hover:-translate-y-2 transition-all duration-500 p-6 flex flex-col">
-                <div class="relative w-full aspect-square rounded-[2rem] bg-slate-50 border border-slate-100 mb-6 overflow-hidden flex items-center justify-center group-hover:border-blue-100 transition-colors">
-                    <img src="images/stiker.PNG" alt="Sticker Pack Urban" class="w-[80%] h-[80%] object-contain group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                    <div class="absolute top-4 right-4 bg-blue-50 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                        Best Value Pack
-                    </div>
-                </div>
-
-                <div class="flex-1">
-                    <h3 class="text-xl font-black text-slate-700 mb-1">Urban Sticker Pack (Isi 4)</h3>
-                    <p class="text-xs text-slate-400 font-medium mb-4">Koleksi lengkap lebih hemat.</p>
-                </div>
-
-                <div class="mt-auto pt-6 border-t border-slate-100">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex flex-col">
-                            <span class="text-xs font-bold text-slate-300 line-through decoration-red-300 decoration-2">Rp 12.000</span>
-                            <span class="text-3xl font-black text-[#6D7D9B]">10K</span>
-                        </div>
-                        <div class="bg-red-50 text-red-400 text-[10px] font-bold px-2 py-1 rounded-md">
-                            HEMAT 17%
-                        </div>
-                    </div>
-                    <a href="LINK_GOOGLE_FORM_ANDA" target="_blank" class="w-full py-3 rounded-xl bg-white border border-slate-200 text-slate-500 font-bold text-xs uppercase tracking-widest hover:bg-[#A7D8F9] hover:text-white hover:border-[#A7D8F9] transition-all duration-300 flex items-center justify-center gap-2 group/btn">
-                        <span>Beli Sekarang</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="relative md:-mt-8 md:mb-8 z-20 group">
-                <div class="absolute -inset-[2px] bg-gradient-to-br from-[#A7D8F9] via-[#E0C3FC] to-[#A7D8F9] rounded-[2.6rem] opacity-70 blur-sm group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
-                
-                <div class="relative bg-white rounded-[2.5rem] p-6 h-full flex flex-col shadow-2xl">
-                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white text-[10px] font-black px-6 py-2 rounded-full shadow-lg uppercase tracking-[0.2em] z-30">
-                        Most Popular
-                    </div>
-
-                    <div class="relative w-full aspect-square rounded-[2rem] bg-gradient-to-b from-slate-50 to-white border border-slate-100 mb-6 overflow-hidden flex items-center justify-center group-hover:border-purple-100 transition-colors">
-                        <img src="images/bundle.PNG" alt="Bundle Urban Complete" class="w-[85%] h-[85%] object-contain group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 z-10">
-                        <div class="absolute top-10 left-10 w-2 h-2 bg-blue-400 rounded-full blur-[1px] animate-bounce"></div>
-                        <div class="absolute bottom-10 right-10 w-3 h-3 bg-purple-400 rounded-full blur-[1px] animate-bounce" style="animation-delay: 0.5s"></div>
-                    </div>
-
-                    <div class="flex-1 text-center">
-                        <h3 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#6D7D9B] to-[#E0C3FC] mb-1">ULTIMATE BUNDLE</h3>
-                        <p class="text-xs text-slate-400 font-medium mb-4">Paket Komplit: 3 Stiker + 1 Keychain.</p>
-                    </div>
-
-                    <div class="mt-auto pt-6 border-t border-slate-100">
-                        <div class="flex flex-col items-center justify-center mb-6">
-                            <span class="text-sm font-bold text-slate-300 line-through decoration-red-400 decoration-4">Rp 19.000</span>
-                            <div class="flex items-start justify-center">
-                                <span class="text-lg font-bold text-[#E0C3FC] mt-2 mr-1">Rp</span>
-                                <span class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#A7D8F9] to-[#E0C3FC]">16K</span>
-                            </div>
-                            <div class="mt-2 bg-gradient-to-r from-red-400 to-rose-400 text-white text-[10px] font-bold px-3 py-0.5 rounded-full shadow-md animate-pulse">
-                                HEMAT 16%
+                    <div class="group relative bg-white/60 backdrop-blur-xl rounded-[2.5rem] border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(167,216,249,0.2)] hover:-translate-y-2 transition-all duration-500 p-6 flex flex-col">
+                        <div class="relative w-full aspect-square rounded-[2rem] bg-slate-50 border border-slate-100 mb-6 overflow-hidden flex items-center justify-center group-hover:border-blue-100 transition-colors">
+                            <img src="images/stiker.PNG" alt="Sticker Pack Urban" class="w-[80%] h-[80%] object-contain group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                            <div class="absolute top-4 right-4 bg-blue-50 text-blue-400 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                                Best Value Pack
                             </div>
                         </div>
-                        <a href="LINK_GOOGLE_FORM_ANDA" target="_blank" class="w-full py-4 rounded-xl bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white font-bold text-sm uppercase tracking-widest shadow-[0_10px_20px_-5px_rgba(167,216,249,0.5)] hover:shadow-[0_20px_30px_-5px_rgba(224,195,252,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2">
-                            <span>Ambil Promo Bundle</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
 
-            <div class="group relative bg-white/60 backdrop-blur-xl rounded-[2.5rem] border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(224,195,252,0.2)] hover:-translate-y-2 transition-all duration-500 p-6 flex flex-col">
-                <div class="relative w-full aspect-square rounded-[2rem] bg-slate-50 border border-slate-100 mb-6 overflow-hidden flex items-center justify-center group-hover:border-purple-100 transition-colors">
-                    <img src="images/keychain.PNG" alt="Keychain Urban Premium" class="w-[80%] h-[80%] object-contain group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-                    <div class="absolute top-4 right-4 bg-purple-50 text-purple-400 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
-                        Premium Quality
-                    </div>
-                </div>
-
-                <div class="flex-1">
-                    <h3 class="text-xl font-black text-slate-700 mb-1">Urban Keychain</h3>
-                    <p class="text-xs text-slate-400 font-medium mb-4">Aksesoris wajib gaya urban.</p>
-                </div>
-
-                <div class="mt-auto pt-6 border-t border-slate-100">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex flex-col">
-                            <span class="text-xs font-bold text-slate-300 line-through decoration-red-300 decoration-2">Rp 15.000</span>
-                            <span class="text-3xl font-black text-[#6D7D9B]">10K</span>
+                        <div class="flex-1">
+                            <h3 class="text-xl font-black text-slate-700 mb-1">Urban Sticker Pack (Isi 4)</h3>
+                            <p class="text-xs text-slate-400 font-medium mb-4">Koleksi lengkap lebih hemat.</p>
                         </div>
-                        <div class="bg-red-50 text-red-400 text-[10px] font-bold px-2 py-1 rounded-md">
-                            HEMAT 33%
+
+                        <div class="mt-auto pt-6 border-t border-slate-100">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-slate-300 line-through decoration-red-300 decoration-2">Rp 12.000</span>
+                                    <span class="text-3xl font-black text-[#6D7D9B]">10K</span>
+                                </div>
+                                <div class="bg-red-50 text-red-400 text-[10px] font-bold px-2 py-1 rounded-md">
+                                    HEMAT 17%
+                                </div>
+                            </div>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3jfvmHajROK_810WaKh0yM6CJIRc6yd3dsm8nUshHUXavkA/viewform" target="_blank" class="w-full py-3 rounded-xl bg-white border border-slate-200 text-slate-500 font-bold text-xs uppercase tracking-widest hover:bg-[#A7D8F9] hover:text-white hover:border-[#A7D8F9] transition-all duration-300 flex items-center justify-center gap-2 group/btn">
+                                <span>Beli Sekarang</span>
+                            </a>
                         </div>
                     </div>
-                    <a href="LINK_GOOGLE_FORM_ANDA" target="_blank" class="w-full py-3 rounded-xl bg-white border border-slate-200 text-slate-500 font-bold text-xs uppercase tracking-widest hover:bg-[#E0C3FC] hover:text-white hover:border-[#E0C3FC] transition-all duration-300 flex items-center justify-center gap-2 group/btn">
-                        <span>Beli Sekarang</span>
-                    </a>
+
+                    <div class="relative md:-mt-8 md:mb-8 z-20 group order-last md:order-none">
+                        <div class="absolute -inset-[2px] bg-gradient-to-br from-[#A7D8F9] via-[#E0C3FC] to-[#A7D8F9] rounded-[2.6rem] opacity-70 blur-sm group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
+
+                        <div class="relative bg-white rounded-[2.5rem] p-6 h-full flex flex-col shadow-2xl">
+                            <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white text-[10px] font-black px-6 py-2 rounded-full shadow-lg uppercase tracking-[0.2em] z-30">
+                                Most Popular
+                            </div>
+
+                            <div class="relative w-full aspect-square rounded-[2rem] bg-gradient-to-b from-slate-50 to-white border border-slate-100 mb-6 overflow-hidden flex items-center justify-center group-hover:border-purple-100 transition-colors">
+                                <img src="images/bundle.PNG" alt="Bundle Urban Complete" class="w-[85%] h-[85%] object-contain group-hover:scale-110 group-hover:-rotate-3 transition-transform duration-500 z-10">
+                                <div class="absolute top-10 left-10 w-2 h-2 bg-blue-400 rounded-full blur-[1px] animate-bounce"></div>
+                                <div class="absolute bottom-10 right-10 w-3 h-3 bg-purple-400 rounded-full blur-[1px] animate-bounce" style="animation-delay: 0.5s"></div>
+                            </div>
+
+                            <div class="flex-1 text-center">
+                                <h3 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-[#6D7D9B] to-[#E0C3FC] mb-1">ULTIMATE BUNDLE</h3>
+                                <p class="text-xs text-slate-400 font-medium mb-4">Paket Komplit: 3 Stiker + 1 Keychain.</p>
+                            </div>
+
+                            <div class="mt-auto pt-6 border-t border-slate-100">
+                                <div class="flex flex-col items-center justify-center mb-6">
+                                    <span class="text-sm font-bold text-slate-300 line-through decoration-red-400 decoration-4">Rp 25.000</span>
+                                    
+                                    <div class="flex items-start justify-center">
+                                        <span class="text-lg font-bold text-[#E0C3FC] mt-2 mr-1">Rp</span>
+                                        <span class="text-6xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#A7D8F9] to-[#E0C3FC]">16K</span>
+                                    </div>
+                                    <div class="mt-2 bg-gradient-to-r from-red-400 to-rose-400 text-white text-[10px] font-bold px-3 py-0.5 rounded-full shadow-md animate-pulse">
+                                        HEMAT 36%
+                                    </div>
+                                </div>
+                                <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3jfvmHajROK_810WaKh0yM6CJIRc6yd3dsm8nUshHUXavkA/viewform" target="_blank" class="w-full py-4 rounded-xl bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white font-bold text-sm uppercase tracking-widest shadow-[0_10px_20px_-5px_rgba(167,216,249,0.5)] hover:shadow-[0_20px_30px_-5px_rgba(224,195,252,0.6)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2">
+                                    <span>Ambil Promo Bundle</span>
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="group relative bg-white/60 backdrop-blur-xl rounded-[2.5rem] border border-white shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-[0_20px_40px_rgba(224,195,252,0.2)] hover:-translate-y-2 transition-all duration-500 p-6 flex flex-col">
+                        <div class="relative w-full aspect-square rounded-[2rem] bg-slate-50 border border-slate-100 mb-6 overflow-hidden flex items-center justify-center group-hover:border-purple-100 transition-colors">
+                            <img src="images/keychain.PNG" alt="Keychain Urban Premium" class="w-[80%] h-[80%] object-contain group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+                            <div class="absolute top-4 right-4 bg-purple-50 text-purple-400 text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                                Premium Quality
+                            </div>
+                        </div>
+
+                        <div class="flex-1">
+                            <h3 class="text-xl font-black text-slate-700 mb-1">Urban Keychain</h3>
+                            <p class="text-xs text-slate-400 font-medium mb-4">Aksesoris wajib gaya urban.</p>
+                        </div>
+
+                        <div class="mt-auto pt-6 border-t border-slate-100">
+                            <div class="flex items-center justify-between mb-4">
+                                <div class="flex flex-col">
+                                    <span class="text-xs font-bold text-slate-300 line-through decoration-red-300 decoration-2">Rp 15.000</span>
+                                    <span class="text-3xl font-black text-[#6D7D9B]">10K</span>
+                                </div>
+                                <div class="bg-red-50 text-red-400 text-[10px] font-bold px-2 py-1 rounded-md">
+                                    HEMAT 33%
+                                </div>
+                            </div>
+                            <a href="https://docs.google.com/forms/d/e/1FAIpQLSd3jfvmHajROK_810WaKh0yM6CJIRc6yd3dsm8nUshHUXavkA/viewform" target="_blank" class="w-full py-3 rounded-xl bg-white border border-slate-200 text-slate-500 font-bold text-xs uppercase tracking-widest hover:bg-[#E0C3FC] hover:text-white hover:border-[#E0C3FC] transition-all duration-300 flex items-center justify-center gap-2 group/btn">
+                                <span>Beli Sekarang</span>
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
-            </div>
-            </div>
 
-            <div class="mt-12 text-center">
-                <p class="text-[10px] text-slate-400 font-medium uppercase tracking-widest bg-white/50 inline-block px-4 py-2 rounded-full border border-slate-100">
-                    *Sistem Pre-Order: Produksi dimulai setelah kuota terpenuhi (7 Hari Kerja)
-                </p>
-            </div>
+                <div class="mt-12 text-center">
+                    <p class="text-[10px] text-slate-400 font-medium uppercase tracking-widest bg-white/50 inline-block px-4 py-2 rounded-full border border-slate-100">
+                        *Sistem Pre-Order: 7 Hari Kerja
+                    </p>
+                </div>
 
-        </div>
+            </div>
     </section>
 
     <section id="mainevent" class="relative w-full py-24 md:py-32 bg-[#fafdfd] overflow-hidden">
@@ -1664,7 +1686,7 @@
                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                     <span class="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
                 </span>
-                Sale: 14 - 23 Januari 2026
+                Sale: 14 - 20 Januari 2026
             </p>
         </div>
     </div>
@@ -1674,191 +1696,187 @@
     <div class="order-1 md:order-1 group relative bg-white/70 backdrop-blur-2xl rounded-[2.5rem] p-8 border border-slate-100 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_-10px_rgba(167,216,249,0.15)] hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col h-full">
     
     <div class="mb-8 border-b border-slate-100/80 pb-6 text-center md:text-left">
-        <div class="inline-flex items-center justify-center px-4 h-8 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-4 shadow-sm">
-            Online
-        </div>
-        <h5 class="text-2xl font-black text-[#6D7D9B] tracking-tight">TO Online</h5>
+    <div class="inline-flex items-center justify-center px-4 h-8 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold text-slate-400 uppercase tracking-[0.2em] mb-4 shadow-sm">
+        Online
     </div>
-    
-    <div class="flex flex-col mb-8 relative">
-        <div class="absolute -top-3 right-0 md:right-auto md:left-24 bg-rose-50 border border-rose-100 text-[#FFB7B2] text-[9px] font-bold px-2 h-5 inline-flex items-center justify-center rounded-md uppercase tracking-wide">
-            Save 20%
-        </div>
-        <span class="text-base font-bold text-slate-300 line-through decoration-[#FFB7B2] decoration-2">Rp 15.000</span>
-        <div class="flex items-baseline mt-1">
-            <span class="text-lg font-bold text-slate-400 mr-1.5">Rp</span>
-            <span class="text-6xl font-black text-slate-700 tracking-tighter">12K</span>
-        </div>
+    <h5 class="text-2xl font-black text-[#6D7D9B] tracking-tight">TO Online</h5>
+</div>
+
+<div class="flex flex-col mb-8 relative">
+    <div class="absolute -top-3 right-0 md:right-auto md:left-24 bg-rose-50 border border-rose-100 text-[#FFB7B2] text-[9px] font-bold px-2 h-5 inline-flex items-center justify-center rounded-md uppercase tracking-wide">
+        Save 20%
     </div>
+    <span class="text-base font-bold text-slate-300 line-through decoration-[#FFB7B2] decoration-2">Rp 15.000</span>
+    <div class="flex items-baseline mt-1">
+        <span class="text-lg font-bold text-slate-400 mr-1.5">Rp</span>
+        <span class="text-6xl font-black text-slate-700 tracking-tighter">12K</span>
+    </div>
+</div>
 
-    <ul class="space-y-4 mb-10 flex-1">
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#A7D8F9] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Try Out dan Pembahasan</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#A7D8F9] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Perankingan Se-Barlingmas</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#A7D8F9] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Penilaian dengan sistem IRT</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#A7D8F9] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">E-Certificate</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#A7D8F9] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Hadiah Bagi 3 Peringkat Teratas</span>
-        </li>
-    </ul>
+<ul class="space-y-4 mb-10 flex-1">
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#A7D8F9] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Try Out dan Pembahasan</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#A7D8F9] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Perankingan Se-Barlingmas</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#A7D8F9] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Penilaian dengan sistem IRT</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#A7D8F9] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">E-Certificate</span>
+    </li>
+</ul>
 
-    <button class="relative w-full h-14 mt-auto rounded-2xl border border-slate-200 bg-white text-slate-400 overflow-hidden group/btn hover:border-[#A7D8F9] transition-all duration-300 flex items-center justify-center shadow-sm hover:shadow-md">
-        <div class="absolute inset-0 bg-slate-50 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-        <span class="relative z-10 text-xs font-black group-hover/btn:text-[#A7D8F9] uppercase tracking-[0.2em] text-center leading-none">Pilih Online</span>
-    </button>
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSfQBGaNPtBXNmksRwnDsgfrUtti64JMMpb1W42kSMsj8dXtEw/viewform" target="_blank" class="relative w-full h-14 mt-auto rounded-2xl border border-slate-200 bg-white text-slate-400 overflow-hidden group/btn hover:border-[#A7D8F9] transition-all duration-300 flex items-center justify-center shadow-sm hover:shadow-md cursor-pointer">
+    <div class="absolute inset-0 bg-slate-50 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+    <span class="relative z-10 text-xs font-black group-hover/btn:text-[#A7D8F9] uppercase tracking-[0.2em] text-center leading-none">Pilih Online</span>
+</a>
 </div>
 
 <div class="order-2 md:order-3 group relative bg-white/70 backdrop-blur-2xl rounded-[2.5rem] p-8 border border-slate-100 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_40px_-10px_rgba(224,195,252,0.2)] hover:border-[#E0C3FC]/30 hover:-translate-y-2 transition-all duration-500 ease-out flex flex-col h-full">
-    
-    <div class="mb-8 border-b border-slate-100/80 pb-6 text-center md:text-left">
-        <div class="inline-flex items-center justify-center px-4 h-8 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold text-[#E0C3FC] uppercase tracking-[0.2em] mb-4 shadow-sm">
-            Offline
-        </div>
-        <h5 class="text-2xl font-black text-[#6D7D9B] tracking-tight">TO Offline</h5>
-    </div>
-    
-    <div class="flex flex-col mb-8 relative">
-            <div class="absolute -top-3 right-0 md:right-auto md:left-24 bg-rose-50 border border-rose-100 text-[#FFB7B2] text-[9px] font-bold px-2 h-5 inline-flex items-center justify-center rounded-md uppercase tracking-wide">
-            Save 20%
-        </div>
-        <span class="text-base font-bold text-slate-300 line-through decoration-[#FFB7B2] decoration-2">Rp 20.000</span>
-        <div class="flex items-baseline mt-1">
-            <span class="text-lg font-bold text-slate-400 mr-1.5">Rp</span>
-            <span class="text-6xl font-black text-slate-700 tracking-tighter">16K</span>
-        </div>
-    </div>
 
-    <ul class="space-y-4 mb-10 flex-1">
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">TO & Pembahasan IRT System</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Perankingan Se-Barlingmas</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">E-Certificate & Hadiah Top 3</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Photobooth with Jaket Kuning</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Exclusive Kit Merchandise UI</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Unlimited Sharing w/ Maba UI</span>
-        </li>
-    </ul>
+<div class="mb-8 border-b border-slate-100/80 pb-6 text-center md:text-left">
+    <div class="inline-flex items-center justify-center px-4 h-8 rounded-full bg-slate-50 border border-slate-100 text-[10px] font-bold text-[#E0C3FC] uppercase tracking-[0.2em] mb-4 shadow-sm">
+        Offline
+    </div>
+    <h5 class="text-2xl font-black text-[#6D7D9B] tracking-tight">TO Offline</h5>
+</div>
 
-    <button class="relative w-full h-14 mt-auto rounded-2xl border border-slate-200 bg-white group/btn hover:border-[#E0C3FC] transition-all duration-300 flex items-center justify-center overflow-hidden shadow-sm hover:shadow-md">
-        <div class="absolute inset-0 bg-[#E0C3FC]/5 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
-        <span class="relative z-10 text-xs font-black text-slate-400 group-hover/btn:text-[#E0C3FC] uppercase tracking-[0.2em] text-center leading-none">Pilih Offline</span>
-    </button>
+<div class="flex flex-col mb-8 relative">
+        <div class="absolute -top-3 right-0 md:right-auto md:left-24 bg-rose-50 border border-rose-100 text-[#FFB7B2] text-[9px] font-bold px-2 h-5 inline-flex items-center justify-center rounded-md uppercase tracking-wide">
+        Save 20%
+    </div>
+    <span class="text-base font-bold text-slate-300 line-through decoration-[#FFB7B2] decoration-2">Rp 20.000</span>
+    <div class="flex items-baseline mt-1">
+        <span class="text-lg font-bold text-slate-400 mr-1.5">Rp</span>
+        <span class="text-6xl font-black text-slate-700 tracking-tighter">16K</span>
+    </div>
+</div>
+
+<ul class="space-y-4 mb-10 flex-1">
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">TO & Pembahasan IRT System</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Perankingan Se-Barlingmas</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">E-Certificate & Hadiah Top 3</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Exclusive Kit Merchandise UI</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Unlimited Sharing w/ Maba UI 25</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-slate-50 text-slate-400 group-hover/item:bg-[#E0C3FC] group-hover/item:text-white transition-colors duration-300 flex items-center justify-center flex-shrink-0 mt-0.5 shadow-sm">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-500 group-hover/item:text-slate-700 transition-colors pt-1">Tips & Trik Lolos UI All Jalur</span>
+    </li>
+</ul>
+
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSfQBGaNPtBXNmksRwnDsgfrUtti64JMMpb1W42kSMsj8dXtEw/viewform" target="_blank" class="relative w-full h-14 mt-auto rounded-2xl border border-slate-200 bg-white group/btn hover:border-[#E0C3FC] transition-all duration-300 flex items-center justify-center overflow-hidden shadow-sm hover:shadow-md cursor-pointer">
+    <div class="absolute inset-0 bg-[#E0C3FC]/5 opacity-0 group-hover/btn:opacity-100 transition-opacity duration-300"></div>
+    <span class="relative z-10 text-xs font-black text-slate-400 group-hover/btn:text-[#E0C3FC] uppercase tracking-[0.2em] text-center leading-none">Pilih Offline</span>
+</a>
 </div>
 
 <div class="order-3 md:order-2 relative group bg-white/80 backdrop-blur-3xl rounded-[2.5rem] p-8 border border-[#A7D8F9]/40 shadow-[0_30px_60px_-15px_rgba(167,216,249,0.25)] md:-mt-8 md:mb-4 z-20 hover:-translate-y-3 transition-all duration-500 ring-4 ring-[#A7D8F9]/10 flex flex-col h-full overflow-hidden">
+
+<div class="absolute top-0 right-0 p-6 z-20">
+    <div class="h-8 px-5 bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] rounded-full shadow-[0_4px_15px_rgba(167,216,249,0.4)] animate-[pulse_3s_ease-in-out_infinite] flex items-center justify-center">
+        <span class="text-[10px] font-black text-white uppercase tracking-widest leading-none mt-[1px]">Best Deal</span>
+    </div>
+</div>
+
+<div class="mb-8 border-b border-[#A7D8F9]/30 pb-6 relative z-10 text-center md:text-left">
+    <div class="inline-flex items-center justify-center px-4 h-8 rounded-full bg-[#A7D8F9]/10 border border-[#A7D8F9]/30 text-[10px] font-bold text-[#6D7D9B] uppercase tracking-[0.2em] mb-4">
+        Most Popular
+    </div>
+    <h5 class="text-3xl font-black text-[#6D7D9B] tracking-tight">TO + Talkshow</h5>
+</div>
+
+<div class="flex flex-col mb-8 relative z-10">
+    <div class="absolute -top-3 right-0 md:right-auto md:left-24 bg-[#FFB7B2]/10 border border-[#FFB7B2]/30 text-[#FFB7B2] text-[9px] font-bold px-2 h-5 inline-flex items-center justify-center rounded-md uppercase tracking-wide">
+        Save 29%
+    </div>
     
-    <div class="absolute top-0 right-0 p-6 z-20">
-        <div class="h-8 px-5 bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] rounded-full shadow-[0_4px_15px_rgba(167,216,249,0.4)] animate-[pulse_3s_ease-in-out_infinite] flex items-center justify-center">
-            <span class="text-[10px] font-black text-white uppercase tracking-widest leading-none mt-[1px]">Best Deal</span>
-        </div>
-    </div>
-
-    <div class="mb-8 border-b border-[#A7D8F9]/30 pb-6 relative z-10 text-center md:text-left">
-        <div class="inline-flex items-center justify-center px-4 h-8 rounded-full bg-[#A7D8F9]/10 border border-[#A7D8F9]/30 text-[10px] font-bold text-[#6D7D9B] uppercase tracking-[0.2em] mb-4">
-            Most Popular
-        </div>
-        <h5 class="text-3xl font-black text-[#6D7D9B] tracking-tight">TO + Talkshow</h5>
-    </div>
+    <span class="text-lg font-bold text-slate-300 line-through decoration-[#FFB7B2] decoration-2">Rp 45.000</span>
     
-    <div class="flex flex-col mb-8 relative z-10">
-        <div class="absolute -top-3 right-0 md:right-auto md:left-24 bg-[#FFB7B2]/10 border border-[#FFB7B2]/30 text-[#FFB7B2] text-[9px] font-bold px-2 h-5 inline-flex items-center justify-center rounded-md uppercase tracking-wide">
-            Save 9%
-        </div>
-        <span class="text-lg font-bold text-slate-300 line-through decoration-[#FFB7B2] decoration-2">Rp 35.000</span>
-        <div class="flex items-baseline mt-1">
-            <span class="text-xl font-bold text-[#A7D8F9] mr-1.5">Rp</span>
-            <span class="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#A7D8F9] to-[#E0C3FC] tracking-tighter drop-shadow-sm">32K</span>
-        </div>
+    <div class="flex items-baseline mt-1">
+        <span class="text-xl font-bold text-[#A7D8F9] mr-1.5">Rp</span>
+        <span class="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-br from-[#A7D8F9] to-[#E0C3FC] tracking-tighter drop-shadow-sm">32K</span>
     </div>
+</div>
 
-    <ul class="space-y-4 mb-10 flex-1 relative z-10">
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white shadow-[0_4px_12px_rgba(167,216,249,0.3)] flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-600 pt-1">Semua Benefit Try Out Offline</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white shadow-[0_4px_12px_rgba(167,216,249,0.3)] flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-600 pt-1">Talkshow Inspiratif Alumni UI</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white shadow-[0_4px_12px_rgba(167,216,249,0.3)] flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-600 pt-1">Sesi Interaktif (Tanya Jawab)</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white shadow-[0_4px_12px_rgba(167,216,249,0.3)] flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-600 pt-1">Exclusive Merchandise + Photobooth</span>
-        </li>
-        <li class="flex items-start gap-4 group/item">
-            <div class="w-6 h-6 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white shadow-[0_4px_12px_rgba(167,216,249,0.3)] flex items-center justify-center flex-shrink-0 mt-0.5">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
-            </div>
-            <span class="text-xs font-bold text-slate-600 pt-1">Unlimited Sharing Session</span>
-        </li>
-    </ul>
+<ul class="space-y-4 mb-10 flex-1 relative z-10">
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white shadow-[0_4px_12px_rgba(167,216,249,0.3)] flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-600 pt-1">Semua Benefit Try Out Offline</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white shadow-[0_4px_12px_rgba(167,216,249,0.3)] flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-600 pt-1">Talkshow Inspiratif Alumni UI</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white shadow-[0_4px_12px_rgba(167,216,249,0.3)] flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-600 pt-1">Sesi Interaktif (Tanya Jawab)</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white shadow-[0_4px_12px_rgba(167,216,249,0.3)] flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-600 pt-1">Exclusive Merchandise + Photobooth</span>
+    </li>
+    <li class="flex items-start gap-4 group/item">
+        <div class="w-6 h-6 rounded-full bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] text-white shadow-[0_4px_12px_rgba(167,216,249,0.3)] flex items-center justify-center flex-shrink-0 mt-0.5">
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <span class="text-xs font-bold text-slate-600 pt-1">Unlimited Sharing Session</span>
+    </li>
+</ul>
 
-    <button class="relative w-full h-14 mt-auto rounded-2xl border border-transparent bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] group/btn hover:shadow-[0_15px_30px_-5px_rgba(167,216,249,0.7)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center overflow-hidden shadow-[0_10px_20px_-5px_rgba(167,216,249,0.5)]">
-        <div class="absolute inset-0 bg-white/0 group-hover/btn:bg-white/20 transition-colors duration-300"></div>
-        <span class="relative z-10 text-xs font-black text-white uppercase tracking-[0.2em] text-center leading-none">Amankan Kursi</span>
-    </button>
-    <p class="text-center text-[9px] text-[#A7D8F9] mt-4 font-bold tracking-[0.15em] uppercase relative z-10">Kuota Sangat Terbatas!</p>
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSfQBGaNPtBXNmksRwnDsgfrUtti64JMMpb1W42kSMsj8dXtEw/viewform" target="_blank" class="relative w-full h-14 mt-auto rounded-2xl border border-transparent bg-gradient-to-r from-[#A7D8F9] to-[#E0C3FC] group/btn hover:shadow-[0_15px_30px_-5px_rgba(167,216,249,0.7)] hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center overflow-hidden shadow-[0_10px_20px_-5px_rgba(167,216,249,0.5)] cursor-pointer">
+    <div class="absolute inset-0 bg-white/0 group-hover/btn:bg-white/20 transition-colors duration-300"></div>
+    <span class="relative z-10 text-xs font-black text-white uppercase tracking-[0.2em] text-center leading-none">Amankan Kursi</span>
+</a>
+<p class="text-center text-[9px] text-[#A7D8F9] mt-4 font-bold tracking-[0.15em] uppercase relative z-10">Kuota Sangat Terbatas!</p>
 </div>
 
 </div>
@@ -1904,7 +1922,7 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row gap-3 md:gap-4">
-                        <a href="https://linktr.ee/UI.URBAN2026" target="_blank" class="group relative w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-slate-800 rounded-xl md:rounded-2xl text-white overflow-hidden shadow-lg shadow-slate-200 active:scale-95 transition-all duration-300">
+                        <a href="https://docs.google.com/forms/d/e/1FAIpQLSfQBGaNPtBXNmksRwnDsgfrUtti64JMMpb1W42kSMsj8dXtEw/viewform" target="_blank" class="group relative w-full sm:w-auto px-6 py-3.5 md:px-8 md:py-4 bg-slate-800 rounded-xl md:rounded-2xl text-white overflow-hidden shadow-lg shadow-slate-200 active:scale-95 transition-all duration-300">
                             <div class="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-500 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                             <div class="relative flex items-center justify-center gap-3">
                                 <span class="text-xs md:text-sm font-bold tracking-[0.2em] uppercase">Amankan Kursi</span>
@@ -1923,7 +1941,8 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-slate-900/30 via-transparent to-transparent z-20 pointer-events-none transition-opacity duration-500 group-hover:opacity-10"></div>
 
                         <div class="absolute bottom-4 left-4 right-4 md:bottom-6 md:left-6 md:right-6 z-30">
-                            <div class="bg-white/95 backdrop-blur-md p-3 md:p-4 rounded-xl md:rounded-2xl shadow-xl border border-white/60 flex items-center justify-between transform transition-transform duration-300 group-hover:-translate-y-1">
+                            <a href="https://maps.app.goo.gl/PEJsxUmPuCgx1299A" target="_blank" class="bg-white/95 backdrop-blur-md p-3 md:p-4 rounded-xl md:rounded-2xl shadow-xl border border-white/60 flex items-center justify-between transform transition-transform duration-300 group-hover:-translate-y-1 cursor-pointer hover:bg-slate-50">
+                                
                                 <div class="flex items-center gap-3 md:gap-4">
                                     <div class="w-8 h-8 md:w-10 md:h-10 rounded-lg md:rounded-xl bg-blue-50 text-blue-500 flex items-center justify-center shadow-inner flex-shrink-0">
                                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
@@ -1933,10 +1952,11 @@
                                         <span class="text-xs md:text-sm font-black text-slate-800 block truncate">SMAN 2 Purwokerto</span>
                                     </div>
                                 </div>
+                                
                                 <div class="w-7 h-7 md:w-8 md:h-8 rounded-full bg-slate-800 text-white flex items-center justify-center flex-shrink-0">
                                     <svg class="w-3 h-3 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                                 </div>
-                            </div>
+                            </a>
                         </div>
 
                         <div id="dynamic-map-container" class="w-full h-full relative z-10 bg-slate-200">
@@ -1948,7 +1968,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
